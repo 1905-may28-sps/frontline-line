@@ -16,7 +16,8 @@ import { HomeComponent } from './Components/home/home.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [UserService,
+  PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
