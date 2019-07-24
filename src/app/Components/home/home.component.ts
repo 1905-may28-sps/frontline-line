@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  faLightbulb as faSolidLightbulb,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { ThemeService } from "src/app/theme/theme.service";
 
 @Component({
   selector: 'app-home',
@@ -8,10 +14,31 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   imageSrc = ''
+  faLightbulb: IconDefinition;
 
-  constructor() { }
+  constructor(
+    private themeService: ThemeService
+  ) { }
 
   ngOnInit() {
+    this.setLightbulb();
+  }
+  setLightbulb() {
+    if (this.themeService.isDarkTheme()) {
+      this.faLightbulb = faRegularLightbulb;
+    } else {
+      this.faLightbulb = faSolidLightbulb;
+    }
+  }
+
+  toggleTheme() {
+    if (this.themeService.isDarkTheme()) {
+      this.themeService.setLightTheme();
+    } else {
+      this.themeService.setDarkTheme();
+    }
+
+    this.setLightbulb();
   }
 
 }
