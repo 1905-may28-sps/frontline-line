@@ -12,6 +12,7 @@ import { Post } from 'src/app/model/post';
 export class HomeComponent implements OnInit {
   users: User[] = [];
   posts: Post[]=[];
+  post: Post=new Post();
 
   imageSrc = ''
 
@@ -52,5 +53,19 @@ export class HomeComponent implements OnInit {
       },
       error => console.log('something unexpected happened')
     );
+  }
+
+  addPost(){
+    console.log(this.post);
+    this.postService.addPost(this.post).subscribe(
+      resp=>{
+        console.log(resp);
+        this.posts.push(resp);
+        this.post=new Post();
+      },
+      error=>{
+        console.log('failed at post');
+      }
+    )
   }
 }

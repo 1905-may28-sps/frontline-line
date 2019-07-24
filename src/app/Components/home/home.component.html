@@ -78,9 +78,9 @@
   <div class="postAdd">
           <form >
     <div class="input-group mb-1"  >
-            <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post"></textarea>
+            <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post" [(ngModel)]="post.body"></textarea>
             <div class="input-group-append">
-            <button routerLink="/addPost" class="btn btn-outline-secondary"  type="button" id="addPostButton">Post</button>
+            <button routerLink="/addPost" class="btn btn-outline-secondary"  (click)="addPost()" type="button" id="addPostButton">Post</button>
             </div>
           </div>
           </form>
