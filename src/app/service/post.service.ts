@@ -22,6 +22,7 @@ export class PostService {
   public addPost(post: Post){
     var d=new Date();
     post.timestamp=d.toDateString();
+    //post.point=0;
 
     // this.reqOptions.headers.append('test', 'test'); //if you have more headers
  

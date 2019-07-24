@@ -90,8 +90,8 @@
 
            <ul class="list-group">
                    
-                   <li class="list-group-item">
-                            <div class="card"  *ngFor="let post of posts">
+                   <li class="card list-group-item"*ngFor="let post of posts">
+                            
                                             <div class="card-header">
                                               {{ post.user.firstName }}
                                             </div>
@@ -100,9 +100,9 @@
                                             </div>
                                             <div class="card-footer text-muted">
                                     <div class="input-group mb-1" >
-                                               <textarea   id="newComment" type="text" class="form-control" placeholder="Comment"></textarea>
+                                               <textarea   type="text" class="form-control" placeholder="Comment" [(ngModel)]="comment.body"></textarea>
                                     <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary"  type="button" id="addComButton">Say it!</button>
+                                    <button class="btn btn-outline-secondary"  type="button" (click)="addComment(post)">Say it!</button>
                             
                                   
                                     <button><img src="../../../assets/images/thumbsup.png"  width="30" height="30" value=1></button>
@@ -112,15 +112,18 @@
                     
                                     
                             </div>
-                            <div class="showComment">
+                       </div>
+                            <div class="showComment" *ngFor="let comment of comments">
+                              <div *ngIf="post.postId==comment.postId.postId" >
                                 <li class="list-group-item">
-                                    {{ comment.body }}-{{ comment.userId.firstName }}
+                                 <b>@{{comment.userId.firstName}}</b>  {{comment.body}}
                               </li>
+                              </div>
                             </div>
                                    
-                                            </div>
+                                            
                                           </div>
-                                          </div>
+                                          
 
                    </li>
 
