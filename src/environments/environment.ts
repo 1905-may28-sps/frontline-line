@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  postAppUrl: 'http://localhost:8081/Project2'
+  production: false
 };
 
 /*

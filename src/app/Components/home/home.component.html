@@ -1,37 +1,37 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-theme">
-        <ul class="navbar-header d-flex col">
-                <img src="../../../assets/images/thefrontline.png" width="130" height="130"  >        
-        </ul>
+  <ul class="navbar-header d-flex col">
+          <img src="../../../assets/images/thefrontline.png" width="130" height="130"  >        
+  </ul>
 
 <ul class="nav navbar-nav navbar-right ml-auto">
 <form class="form-inline my-2 my-lg-0">
 <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Theme 1</a>
-          <a class="dropdown-item" href="#">Theme 2</a>
-          <a class="dropdown-item" href="#">Theme 3</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Report a user</a>
-        </div>
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Settings
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="#">Theme 1</a>
+    <a class="dropdown-item" href="#">Theme 2</a>
+    <a class="dropdown-item" href="#">Theme 3</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Report a user</a>
+  </div>
 </li>
 <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort By
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Most Recent</a>
-                <a class="dropdown-item" href="#">Followers</a>
-                <a class="dropdown-item" href="#">Date</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Other</a>
+  <a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort By
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Most Recent</a>
+          <a class="dropdown-item" href="#">Followers</a>
+          <a class="dropdown-item" href="#">Date</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Other</a>
 
-                
-        </div>
+          
+  </div>
 </li>
 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -42,80 +42,97 @@
 </nav>
 <br>
 <div class="container">
-        <div class="row">
+  <div class="row">
 <!-- Left Nav-->
 <div class="col-3">
-                <div class="w3-sidebar w3-light-grey ">
-                                <h3 class="w3-bar-item">User Profile</h3>
-                                <a class="round-circle"></a>
-                        </div>
+          <div class="w3-sidebar w3-light-grey ">
+                          <h3 class="w3-bar-item">User Profile</h3>
+                          <a class="round-circle"></a>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let user of users">
+                                <td>{{ user.firstName }} {{ user.lastName }} </td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                  </div>
 </div>
 
+<!-- Left Nav-->
 
-      <!-- Page Content -->
-      <div class="col-6">
-        <h1>Home Page</h1>
-      
-      
-      <div class="container posts">
-      <h2>Posts</h2>
-      
-      <div class="postAdd">
-              <form >
-        <div class="input-group mb-1"  >
-                <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post"></textarea>
-                <div class="input-group-append">
-                <button routerLink="/addPost" class="btn btn-outline-secondary"  type="button" id="addPostButton">Post</button>
-                </div>
-              </div>
-              </form>
-      </div>
 
-      <div class="postShow">
+   <!-- Page Content -->
+   <div class="col-6">
+    <h1>Home Page</h1>
+  
+  
+  <div class="container posts">
+  <h2>Posts</h2>
+  
+  <div class="postAdd">
+          <form >
+    <div class="input-group mb-1"  >
+            <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post"></textarea>
+            <div class="input-group-append">
+            <button routerLink="/addPost" class="btn btn-outline-secondary"  type="button" id="addPostButton">Post</button>
+            </div>
+          </div>
+          </form>
+  </div>
 
-               <ul class="list-group">
-                       
-                       <li class="list-group-item">
-                                <div class="card">
-                                                <div class="card-header">
-                                                  User
-                                                </div>
-                                                <div class="card-body">
-                                                  <p id=postShowBody class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                </div>
-                                                <div class="card-footer text-muted">
-                                        <div class="input-group mb-1" >
-                                                   <textarea   id="newComment" type="text" class="form-control" placeholder="Comment"></textarea>
-                                        <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary"  type="button" id="addComButton">Say it!</button>
-                                
-                                      
-                                        <button><img src="../../../assets/images/thumbsup.png"  width="30" height="30" value=1></button>
-                                        <button><img src="../../../assets/images/thumbsdown.png"  width="30" height="30" value=2></button>
-                                       <button> <img src="../../../assets/images/smile.png"  width="30" height="30" value=3></button>
-                                     
-                        
-                                        
-                                </div>
-                                       
-                                                </div>
-                                              </div>
-                                              </div>
+  <div class="postShow">
 
-                       </li>
+           <ul class="list-group">
+                   
+                   <li class="list-group-item">
+                            <div class="card"  *ngFor="let post of posts">
+                                            <div class="card-header">
+                                              {{ post.user.firstName }}
+                                            </div>
+                                            <div class="card-body">
+                                              <p id=postShowBody class="card-text">{{ post.body }}</p>
+                                            </div>
+                                            <div class="card-footer text-muted">
+                                    <div class="input-group mb-1" >
+                                               <textarea   id="newComment" type="text" class="form-control" placeholder="Comment"></textarea>
+                                    <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary"  type="button" id="addComButton">Say it!</button>
+                            
+                                  
+                                    <button><img src="../../../assets/images/thumbsup.png"  width="30" height="30" value=1></button>
+                                    <button><img src="../../../assets/images/thumbsdown.png"  width="30" height="30" value=2></button>
+                                   <button> <img src="../../../assets/images/smile.png"  width="30" height="30" value=3></button>
+                                 
+                    
+                                    
+                            </div>
+                                   
+                                            </div>
+                                          </div>
+                                          </div>
 
-               </ul>
+                   </li>
+
+           </ul>
 </div>
 </div>
-     
-     </div>  
-     <!-- Right Nav-->
-<div class="col-3">
-                <div class="w3-sidebar w3-light-grey  w3-bar-block" style="width:25%;right:0">
-                                <h3 class="w3-bar-item">Weather </h3>           
-                         </div>
-</div>
-</div>
-</div>
-
  
+ </div>  
+ <!-- Right Nav-->
+<div class="col-3">
+            <div class="w3-sidebar w3-light-grey  w3-bar-block" style="width:25%;right:0">
+                            <h3 class="w3-bar-item">Weather </h3>           
+                     </div>
+</div>
+</div>
+</div>
+
+
+
+     
