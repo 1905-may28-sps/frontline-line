@@ -30,22 +30,27 @@
                 <li class="nav-item">
                     <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
                     <ul class="dropdown-menu form-wrapper">					
-                        <li>
-                            <form action="/examples/actions/confirmation.php" method="post">
-                                <p class="hint-text">Fill in this form to create your account!</p>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Username" required="required">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" required="required">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirm Password" required="required">
-                                </div>
-                                <input type="submit" class="btn btn-primary btn-block" value="Sign up">
-                            </form>
-                        </li>
+                      <li>
+
+                        <p class="hint-text">Fill in this form to create your account!</p>
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Username" [(ngModel)]="regUser.username" required="required">
+                        </div>
+                        <div class="form-group">
+                          <input type="password" class="form-control" placeholder="Password" [(ngModel)]="regUser.password" required="required">
+                        </div>
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="regUser.firstName" required="required">
+                        </div>
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="regUser.lastName" required="required">
+                        </div>
+
+                        <input type="submit" class="btn btn-primary btn-block" value="Sign up" (click)="registerUser()">
+
+                      </li>
                     </ul>
                 </li>
+                <input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
             </ul>
         </nav>
