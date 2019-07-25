@@ -1,11 +1,9 @@
-import { User } from './user.model';
+import { User } from './user';
 
 export class Post {
-    id: number;
     user:User;
     body: string;
     image:string;
     timestamp:string;
-    //point: number;
     
 }

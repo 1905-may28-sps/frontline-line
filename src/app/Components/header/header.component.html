@@ -14,16 +14,16 @@
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
                     <ul class="dropdown-menu form-wrapper">					
                         <li>
-                           
+                            <form action="/examples/actions/confirmation.php" method="post">
                                 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Username" required="required" [(ngModel)]="loggedUser.username">
+                                    <input type="text" class="form-control" placeholder="Username" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" required="required" [(ngModel)]="loggedUser.password">
+                                    <input type="password" class="form-control" placeholder="Password" required="required">
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-block" value="Login" (click)="postLogin()">
-                           
+                                <input type="submit" class="btn btn-primary btn-block" value="Login">
+                            </form>
                         </li>
                     </ul>
                 </li>
@@ -31,7 +31,7 @@
                     <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
                     <ul class="dropdown-menu form-wrapper">					
                         <li>
-                           
+                            <form action="/examples/actions/confirmation.php" method="post">
                                 <p class="hint-text">Fill in this form to create your account!</p>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Username" required="required">
@@ -43,7 +43,7 @@
                                     <input type="password" class="form-control" placeholder="Confirm Password" required="required">
                                 </div>
                                 <input type="submit" class="btn btn-primary btn-block" value="Sign up">
-                      
+                            </form>
                         </li>
                     </ul>
                 </li>

@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  postAppUrl: 'http://localhost:8081/Project2'
 };
