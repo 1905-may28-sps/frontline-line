@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
 import { UserService } from 'src/app/service/user.service';
+import { Role } from 'src/app/model/role';
 
 //import { Router } from '@angular/router';
 
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   imageSrc = ''
   regUser: User = new User();
   loggedUser: User = new User();
+  //newusersRole: Role[] = [];
 
 
 
@@ -63,11 +65,26 @@ export class HeaderComponent implements OnInit {
 
   registerUser() {
     console.log("registering");
+    //this.regUser.userId = 8;
+    this.regUser.roleId = {
+      roleId: 1,
+      roleType: "Employee"
+    };
+    this.regUser.bannedId = {
+      bannedId: 1,
+      bannedType: "Not Banned"
+    };
+    this.regUser.themeId = {
+      themeId: 1,
+      themeType: "Default"
+    };
+    console.log(this.regUser);
     this.userService.postReg(this.regUser).subscribe(
       resp => {
         console.log(resp);
       },
       error => {
+        console.log(this.regUser);
         console.log('failed at registering');
       }
     )
