@@ -7,6 +7,7 @@ import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,8 +20,11 @@ export class HomeComponent implements OnInit {
   newpost: Post = new Post();
   newcomment: Comment = new Comment();
   showComment: boolean = false;
+  //clicked = false;
+ 
   loggedUser: User = new User();
   theWeather: [];
+  x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
 
   imageSrc = ''
 
@@ -36,6 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleComment(post: Post) {
+
     this.showComment = !this.showComment;
   }
 
@@ -75,7 +80,8 @@ export class HomeComponent implements OnInit {
     console.log(this.newpost);
     // console.log(HeaderComponent.arguments.loggedUser);
     // this.post.user=HeaderComponent.arguments.loggedUser;
-    this.newpost.user=this.loggedUser;
+    // this.newpost.user=this.loggedUser;
+    this.newpost.user=this.x;
 
     this.postService.addPost(this.newpost).subscribe(
       resp => {
@@ -106,8 +112,9 @@ export class HomeComponent implements OnInit {
   addComment(post: Post) {
     console.log(this.newcomment);
     this.newcomment.postId = post;
-    this.newcomment.userId=this.loggedUser;
-    //this.comment.userId=this.user;
+    console.log(this.x);
+    //this.newcomment.userId=this.loggedUser;
+    this.newcomment.userId=this.x;
     this.commentService.addComment(this.newcomment).subscribe(
       resp => {
         console.log(resp);
@@ -126,8 +133,8 @@ export class HomeComponent implements OnInit {
       resp => {
         console.log(resp);
         if (resp != null) {
-          ;
           this.loggedUser = resp;
+          localStorage.setItem('currentUser', JSON.stringify({ resp }));
         }
         else {
           console.log("fail login")
