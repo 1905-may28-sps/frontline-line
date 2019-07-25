@@ -3,7 +3,13 @@
     "",
     "\\e2e",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\Components",
+    "\\src\\app\\Components\\header",
+    "\\src\\app\\Components\\home",
+    "\\src\\app\\model",
+    "\\src\\app\\service"
   ],
+  "SelectedNode": "\\src\\app\\Components\\header\\header.component.ts",
   "PreviewInSolutionExplorer": false
 }
