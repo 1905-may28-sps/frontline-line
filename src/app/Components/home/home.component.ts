@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   newcomment: Comment = new Comment();
   showComment: boolean = false;
   loggedUser: User = new User();
+  theWeather: [];
 
   imageSrc = ''
 
@@ -31,9 +32,10 @@ export class HomeComponent implements OnInit {
     this.getUsers();
     this.getPosts();
     this.getComments();
+    this.getweather();
   }
 
-  toggleComment() {
+  toggleComment(post: Post) {
     this.showComment = !this.showComment;
   }
 
@@ -135,6 +137,21 @@ export class HomeComponent implements OnInit {
         console.log('could not find user');
       }
     )
+  }
+  getweather(){
+    this.userService.getWeather().subscribe(
+      resp => {
+        if (resp != null) {
+          this.theWeather = resp;
+          console.log(this.theWeather);
+        }
+        else {
+          console.log('Error loading users, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+
   }
 
 

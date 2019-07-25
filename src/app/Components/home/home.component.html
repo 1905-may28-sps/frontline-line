@@ -139,8 +139,8 @@
               </div>
               <div class="card-footer text-muted">
                 <div class="input-group mb-1">
-                  <!-- *ngIf="showComment"  -->
-                  <textarea type="text" placeholder="Comment" [(ngModel)]="newcomment.body"></textarea>
+                  <!--  -->
+                  <textarea type="text" placeholder="Comment" *ngIf="showComment" [(ngModel)]="newcomment.body"></textarea>
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" (click)="addComment(post)">Say it!</button>
 
@@ -175,7 +175,14 @@
 <!-- Right Nav-->
 <div class="col-3">
   <div class="w3-sidebar w3-light-grey  w3-bar-block">
-    <h3 class="w3-bar-item">Weather </h3>
+    <h4 class="w3-bar-item">Weather in {{theWeather.name}} </h4>
+    <ul class="list-group w3-light-grey">
+      <!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
+       <li class="list-group-item w3-light-grey">{{theWeather.main.temp}}</li>
+      <li class="list-group-item w3-light-grey">{{theWeather.weather[0].main}}</li>
+      <li  class="list-group-item w3-light-grey">{{theWeather.weather[0].description}}</li>
+     
+    </ul>
   </div>
 </div>
 </div>
