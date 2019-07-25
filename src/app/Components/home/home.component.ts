@@ -53,50 +53,50 @@ export class HomeComponent implements OnInit {
     }
 
     this.setLightbulb();
-
-  getUsers(){
-    this.userService.getUsers().subscribe(
-      resp => {
-        if(resp != null){
-          this.users = resp;
-          console.log(this.users);
-        }
-        else{
-          console.log('Error loading users, null value sent back')
-        }
-      },
-      error => console.log('something unexpected happened')
-    );
   }
 
+    getUsers(){
+      this.userService.getUsers().subscribe(
+        resp => {
+          if (resp != null) {
+            this.users = resp;
+            console.log(this.users);
+          }
+          else {
+            console.log('Error loading users, null value sent back')
+          }
+        },
+        error => console.log('something unexpected happened')
+      );
+    }
 
-  getPosts(){
-    this.postService.getPosts().subscribe(
-      resp => {
-        if(resp != null){
-          this.posts = resp;
-          console.log(this.posts);
-        }
-        else{
-          console.log('Error loading posts, null value sent back')
-        }
-      },
-      error => console.log('something unexpected happened')
-    );
->>>>>>> v1
-  }
 
-  addPost(){
-    console.log(this.post);
-    this.postService.addPost(this.post).subscribe(
-      resp=>{
-        console.log(resp);
-        this.posts.push(resp);
-        this.post=new Post();
-      },
-      error=>{
-        console.log('failed at post');
-      }
-    )
+    getPosts(){
+      this.postService.getPosts().subscribe(
+        resp => {
+          if (resp != null) {
+            this.posts = resp;
+            console.log(this.posts);
+          }
+          else {
+            console.log('Error loading posts, null value sent back')
+          }
+        },
+        error => console.log('something unexpected happened')
+      );
+    }
+
+    addPost(){
+      console.log(this.post);
+      this.postService.addPost(this.post).subscribe(
+        resp => {
+          console.log(resp);
+          this.posts.push(resp);
+          this.post = new Post();
+        },
+        error => {
+          console.log('failed at post');
+        }
+      )
+    }
   }
-}

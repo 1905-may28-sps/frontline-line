@@ -14,16 +14,16 @@
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
                     <ul class="dropdown-menu form-wrapper">					
                         <li>
-                            <form action="/examples/actions/confirmation.php" method="post">
+                            
                                 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Username" required="required">
+                                    <input type="text" class="form-control" placeholder="username" id="username" [(ngModel)]="loggedUser.username" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" required="required">
+                                    <input type="password" class="form-control" placeholder="password" id="password" [(ngModel)]="loggedUser.password" required="required">
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-block" value="Login">
-                            </form>
+                                <input type="submit" class="btn btn-primary btn-block" value="Login" (click)="postLogin()">
+                            
                         </li>
                     </ul>
                 </li>

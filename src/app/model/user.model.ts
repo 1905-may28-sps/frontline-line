@@ -6,6 +6,4 @@ export class User{
     lastName: string;
     roleId:number;
     image: string;
-    bannedId: number;
-    themeId: number;
 }
