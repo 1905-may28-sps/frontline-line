@@ -15,4 +15,8 @@ export class UserService {
     return this.http.get<User[]>(this.url);
   }
 
+  public postLogin(user: User) {
+    return this.http.post<User>(`${this.url}/login`,user);
+  }
+
 }

@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
   posts: Post[]=[];
   comments: Comment[]=[];
   post: Post=new Post();
-  comment: Comment =new Comment();
+  newcomment: Comment =new Comment();
+  showComment: boolean = false;
 
   imageSrc = ''
 
@@ -29,6 +30,11 @@ export class HomeComponent implements OnInit {
     this.getPosts();
     this.getComments();
   }
+
+  toggleComment(){
+    this.showComment = !this.showComment;
+  }
+
   getUsers(){
     this.userService.getUsers().subscribe(
       resp => {
@@ -89,14 +95,14 @@ export class HomeComponent implements OnInit {
     );
       }
       addComment(post:Post){
-        console.log(this.comment);
-        this.comment.postId=post;
+        console.log(this.newcomment);
+        this.newcomment.postId=post;
         //this.comment.userId=this.user;
-        this.commentService.addComment(this.comment).subscribe(
+        this.commentService.addComment(this.newcomment).subscribe(
           resp=>{
             console.log(resp);
             this.comments.push(resp);
-            this.comment= new Comment();
+            this.newcomment= new Comment();
           },error=>{
             console.log('failed at comment');
           }
