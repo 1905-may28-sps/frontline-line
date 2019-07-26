@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
 
   imageSrc = ''
+  searchText: string = '';
 
   constructor(private userService: UserService, private postService: PostService, private commentService: CommentService) {
     console.log('in user service constructor')
@@ -95,7 +96,16 @@ export class HomeComponent implements OnInit {
       }
     )
   }
-
+  filterPosts(){
+    this.posts = this.posts.filter(it => {
+      console.log('In filter post');
+      this.searchText = this.searchText.toLowerCase();
+      let test =  it.body.toLowerCase().includes(this.searchText);
+      console.log(it.body + test);
+      console.log(this.searchText);
+      return test ;
+    });
+  }
   getComments() {
     this.commentService.getComments().subscribe(
       resp => {
