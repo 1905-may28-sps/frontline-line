@@ -1,17 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { HomeComponent } from './Components/home/home.component';
-import { UserService } from './service/user.service';
-import { Post } from './model/post';
-import { PostService } from './service/post.service';
-
+import { PostAppComponent } from './Components/post-app/post-app.component';
+import { PostListComponent } from './Components/post-list/post-list/post-list.component';
+import { PostFormComponent } from './Components/post-form/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -19,17 +15,14 @@ import { PostService } from './service/post.service';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
- 
+    PostAppComponent,
+    PostListComponent,
+    PostFormComponent,
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule
+    BrowserModule
   ],
-  providers: [
-    UserService,
-    PostService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
