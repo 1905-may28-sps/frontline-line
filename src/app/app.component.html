@@ -1,5 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-header></app-header>
-<app-home></app-home>
 
 
+
+<div class="mat-typography" [ngStyle]="{'font-size': size + 'px'}">
+    <app-header></app-header>
+    <button (click)="size = size + 1">+</button>
+    <button (click)="size = size - 1">-</button>
+    <app-home></app-home>
+    
+    
+    
+    </div>
