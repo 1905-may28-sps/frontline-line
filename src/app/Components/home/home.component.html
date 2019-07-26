@@ -1,26 +1,26 @@
-
-
 <nav class="navbar navbar-expand-lg navbar-theme">
   <ul class="navbar-header d-flex col">
-          <img src="../../../assets/images/thefrontline.png" width="130" height="130"  >        
+    <img src="../../../assets/images/thefrontline.png" width="130" height="130">
   </ul>
 
-<ul class="nav navbar-nav navbar-right ml-auto">
-<form class="form-inline my-2 my-lg-0">
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Settings
-  </a>
-  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="#">Theme 1</a>
-    <a class="dropdown-item" href="#">Theme 2</a>
-    <a class="dropdown-item" href="#">Theme 3</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Report a user</a>
-  </div>
-</li>
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <ul class="nav navbar-nav navbar-right ml-auto">
+  
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Theme 1</a>
+          <a class="dropdown-item" href="#">Theme 2</a>
+          <a class="dropdown-item" href="#">Theme 3</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Report a user</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
           Sort By
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -30,109 +30,138 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Other</a>
 
-          
-  </div>
-</li>
-<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
 
-</ul>
+        </div>
+      </li>
+      <input  [(ngModel)]="searchText" placeholder="search text goes here" (change)="filterPosts()" class="form-control mr-sm-2"
+        aria-label="Search">
+     
+    
+
+  </ul>
 
 </nav>
 <br>
 <div class="container">
   <div class="row">
-<!-- Left Nav-->
-<div class="col-3">
-          <div class="w3-sidebar w3-light-grey ">
-                          <h3 class="w3-bar-item">User Profile</h3>
-                          <a class="round-circle"></a>
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th>Name</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let user of users">
-                                <td>{{ user.firstName }} {{ user.lastName }} </td>
-                              </tr>
-                            </tbody>
-                          </table>
+    <!-- Left Nav-->
+    <div class="col-3">
+      <div class="w3-sidebar w3-light-grey  w3-bar-block" style="width:25%;left: 0%">
+        <h3 class="w3-bar-item">User Profile</h3>
+        <a class="round-circle"></a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users" (click)="message(user)" data-toggle="modal" data-target="#exampleModal" 
+            (click)="frame.show()" mdbWavesEffect>
+              <td>{{ user.firstName }} {{ user.lastName }} </td>
+            </tr>
+          </tbody>
+        </table>
+    
+<!-- Modal 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient: {{ user.firstName }} {{ user.lastName }} </label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+    </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="col-6">
+      <h1>Home Page</h1>
+
+
+      <div class="container posts">
+        <h2>Posts</h2>
+
+        <div class="postAdd">
+          <form>
+            <div class="input-group mb-1">
+              <textarea id="newPost" type="text" class="form-control" placeholder="Add a post"
+                [(ngModel)]="post.body"></textarea>
+              <div class="input-group-append">
+                <button routerLink="/addPost" class="btn btn-outline-secondary" (click)="addPost()" type="button"
+                  id="addPostButton">Post</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="postShow">
+
+          <ul class="list-group">
+
+            <li class="list-group-item">
+              <div class="card" *ngFor="let post of posts">
+
+                <div class="card-header">
+                  {{ post.user.firstName }} {{ post.user.lastName }}
+                </div>
+                <div class="card-body">
+                  <p id=postShowBody class="card-text">{{ post.body }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                  <div class="input-group mb-1">
+                    <textarea id="newComment" type="text" class="form-control" placeholder="Comment"></textarea>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="addComButton">Say it!</button>
+
+
+                      <button><img src="../../../assets/images/thumbsup.png" width="30" height="30" value=1></button>
+                      <button><img src="../../../assets/images/thumbsdown.png" width="30" height="30" value=2></button>
+                      <button> <img src="../../../assets/images/smile.png" width="30" height="30" value=3></button>
+
+
+
+                    </div>
 
                   </div>
-</div>
+                </div>
+              </div>
 
-<!-- Left Nav-->
+            </li>
 
+          </ul>
+        </div>
+      </div>
 
-   <!-- Page Content -->
-   <div class="col-6">
-    <h1>Home Page</h1>
-  
-  
-  <div class="container posts">
-  <h2>Posts</h2>
-  
-  <div class="postAdd">
-          <form >
-    <div class="input-group mb-1"  >
-            <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post" [(ngModel)]="post.body"></textarea>
-            <div class="input-group-append">
-            <button routerLink="/addPost" class="btn btn-outline-secondary"  (click)="addPost()" type="button" id="addPostButton">Post</button>
-            </div>
-          </div>
-          </form>
+    </div>
+    <!-- Right Nav-->
+    <div class="col-3">
+      <div class="w3-sidebar w3-light-grey  w3-bar-block" style="width:25%;right:0">
+        <h3 class="w3-bar-item">Weather </h3>
+      </div>
+    </div>
   </div>
-
-  <div class="postShow">
-
-           <ul class="list-group">
-                   
-                   <li class="list-group-item">
-                            <div class="card"  *ngFor="let post of posts">
-                                            <div class="card-header">
-                                              {{ post.user.firstName }}
-                                            </div>
-                                            <div class="card-body">
-                                              <p id=postShowBody class="card-text">{{ post.body }}</p>
-                                            </div>
-                                            <div class="card-footer text-muted">
-                                    <div class="input-group mb-1" >
-                                               <textarea   id="newComment" type="text" class="form-control" placeholder="Comment"></textarea>
-                                    <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary"  type="button" id="addComButton">Say it!</button>
-                            
-                                  
-                                    <button><img src="../../../assets/images/thumbsup.png"  width="30" height="30" value=1></button>
-                                    <button><img src="../../../assets/images/thumbsdown.png"  width="30" height="30" value=2></button>
-                                   <button> <img src="../../../assets/images/smile.png"  width="30" height="30" value=3></button>
-                                 
-                    
-                                    
-                            </div>
-                                   
-                                            </div>
-                                          </div>
-                                          </div>
-
-                   </li>
-
-           </ul>
 </div>
-</div>
- 
- </div>  
- <!-- Right Nav-->
-<div class="col-3">
-            <div class="w3-sidebar w3-light-grey  w3-bar-block" style="width:25%;right:0">
-                            <h3 class="w3-bar-item">Weather </h3>           
-                     </div>
-</div>
-</div>
-</div>
-
-
-
-     
