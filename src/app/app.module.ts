@@ -9,6 +9,8 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { HomeComponent } from './Components/home/home.component';
 import { UserService } from './service/user.service';
+import { Post } from './model/post';
+import { PostService } from './service/post.service';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { UserService } from './service/user.service';
     HttpClientModule
   ],
   providers: [
-    UserService
+    UserService,
+    PostService
   ],
   bootstrap: [AppComponent]
 })
