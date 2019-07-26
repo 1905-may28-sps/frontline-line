@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-theme">
+        <!-- Navbar content -->
+
+        <!-- Logo -->
+        <ul class="navbar navbar-default navbar-expand-lg navbar-light">
+            <img src="../../../assets/images/thefrontline.png" width="130" height="130" >
+
+        </ul>
+
+      
+        <!-- Login -->
+        <ul class="nav navbar-nav navbar-right ml-auto">			
+                <li class="nav-item">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
+                    <ul class="dropdown-menu form-wrapper">					
+                        <li>
+                           
+                                
+                                <!-- <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username" required="required" [(ngModel)]="loggedUser.username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password" required="required" [(ngModel)]="loggedUser.password">
+                                </div> -->
+                                <input type="submit" class="btn btn-primary btn-block" value="Login" (click)="postLogin()">
+                           
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+                    <ul class="dropdown-menu form-wrapper">					
+                        <li>
+                           
+                                <p class="hint-text">Fill in this form to create your account!</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Confirm Password" required="required">
+                                </div>
+                                <input type="submit" class="btn btn-primary btn-block" value="Sign up">
+                      
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
