@@ -5,5 +5,5 @@ export class Post {
     body: string;
     image:string;
     timestamp:string;
-    
+    point: number;
 }

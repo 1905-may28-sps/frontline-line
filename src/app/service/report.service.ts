@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Post } from '../model/post';
+import { Report } from '../model/report';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class ReportService {
 
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:8080/Project2/post';
+  url = 'http://localhost:8081/Project2/report';
   reqOptions = {
 
     headers: new HttpHeaders({'Content-Type' : 'application/json'}) 
 
   };
 
-  public getPosts(){
-    return this.http.get<Post[]>(this.url);
-  }
+  // public getPosts(){
+  //   return this.http.get<Post[]>(this.url);
+  // }
 
-  public addPost(post: Post){
-    var d=new Date();
-    post.timestamp=d.toDateString();
+  public addReport(report: Report){
+    report.reportType.reportType=1;
+    report.reportType.reportTypeId=1;
 
     // this.reqOptions.headers.append('test', 'test'); //if you have more headers
  
-     return this.http.post<Post>(`${this.url}`, post, this.reqOptions );
+     return this.http.post<Report>(`${this.url}`, report);
  
    }
+
+  
 }
