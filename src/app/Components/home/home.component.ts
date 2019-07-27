@@ -6,13 +6,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { ThemeService } from "src/app/theme/theme.service";
-
 import { UserService } from '../../service/user.service';
 import { User } from 'src/app/model/user.model';
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -28,17 +28,18 @@ export class HomeComponent implements OnInit {
   newcomment: Comment = new Comment();
   showComment: boolean = false;
   //clicked = false;
+  imgUploadStr = '';
  
   loggedUser: User = new User();
   theWeather: [];
   x: User = JSON.parse(localStorage.getItem('currentUser'));
- 
+  
 
   imageSrc = ''
   searchText: string = '';
   faLightbulb: IconDefinition;
 
-  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService) {
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private router: Router) {
 
     console.log('in user service constructor')
   }
@@ -71,6 +72,9 @@ export class HomeComponent implements OnInit {
       error => console.log('something unexpected happened')
     );
   }
+
+ 
+
 
 
   getPosts() {
@@ -184,7 +188,42 @@ export class HomeComponent implements OnInit {
 
 
   }
+  logout() {
+    localStorage.removeItem('currentUser');
+    console.log(localStorage.length);
+    this.router.navigate(['/login']);
 
+  }
+  uploadImage() {
+    //need to grab
+    
+    console.log(this.imgUploadStr);
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.loggedUser.resp["image"] = this.imgUploadStr;
+/*    let objimage = {
+      username: y.resp['username'],
+      password: y.resp['password'],
+      firstName: y.resp['firstName'],
+      lastName: y.resp['lastName'],
+      image: this.imgUploadStr,
+      userId: y.resp['userId']
+    }
+*/
+    console.log("crated obk");
+    console.log(this.loggedUser.resp);
+    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+      resp => {
+        console.log(resp);
+        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        console.log(localStorage);
+        location.reload();
+        this.router.navigate(['/homepage']);
+      },
+      error => {
+        console.log('failed at registering');
+      }
+      )
+  }
 
 
 

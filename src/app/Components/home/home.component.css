@@ -21,3 +21,8 @@ nav {
     margin-right: auto;
   }
 
+.userimgsize {
+  display: block;
+  max-width: 50%;
+  height: auto;
+}
