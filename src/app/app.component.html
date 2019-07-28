@@ -3,11 +3,15 @@
 
 
 <div class="mat-typography" [ngStyle]="{'font-size': size + 'px'}">
-<app-header></app-header>
-<button (click)="size = size + 1">+</button>
-<button (click)="size = size - 1">-</button>
-<app-home></app-home>
-
-
-
-</div>
+        <!--<app-header></app-header>-->
+        <button (click)="size = size + 1">+</button>
+        <button (click)="size = size - 1">-</button>
+        <!--<app-home></app-home>-->
+      
+      
+      
+      
+      
+      
+        <router-outlet></router-outlet>
+      </div>

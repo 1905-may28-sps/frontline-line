@@ -8,9 +8,8 @@
 	</ul>
 
 	<ul class="nav navbar-nav navbar-right ml-auto">
-		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-			href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-			aria-haspopup="true" aria-expanded="false"> Settings </a>
+		<li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Settings </a>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<a class="dropdown-item" (click)="toggleTheme()">Theme</a>
 				<div class="dropdown-divider"></div>
@@ -18,9 +17,9 @@
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="#">Report a user</a>
 			</div>
-			</li>
-		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-			href="#" id="Sort" role="button" data-toggle="dropdown"
+      </li>
+      
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown"
 			aria-haspopup="true" aria-expanded="false"> Sort By </a>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<a class="dropdown-item" href="#">Most Recent</a> 
@@ -30,11 +29,11 @@
 				<a class="dropdown-item" href="#">Other</a>
 			</div>
 			</li>
-		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input [(ngModel)]="searchText" placeholder="search text goes here" (change)="filterPosts()" class="form-control mr-sm-2"
+      aria-label="Search">
 	</ul>
 	
-	<h1 (click)="toggleTheme()">theme</h1>
+	<h3 (click)="toggleTheme()">theme</h3>
 </nav>
 
 <br>
@@ -144,7 +143,7 @@
 		</div>
 		<!-- Right Nav-->
 		<div class="col-3">
-			<div class="w3-sidebar w3-light-grey  w3-bar-block">
+			<div class="w3-sidebar w3-light-grey  w3-bar-block" style="width: 25%; right: 0%">
 				<h4 class="w3-bar-item">Weather in {{theWeather.name}}</h4>
 				<ul class="list-group w3-light-grey">
 					<!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
@@ -154,5 +153,5 @@
 				</ul>
 			</div>
 	
-
+   
 </div>
