@@ -1,196 +1,153 @@
-﻿
+﻿<input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
+<button (click)="logout()">Logout</button>
+
 <nav class="navbar navbar-expand-lg navbar-theme">
-  <ul class="navbar-header d-flex col">
-    <img src="../../../assets/images/thefrontline.png" width="130" height="130">
-  </ul>
+	<ul class="navbar-header d-flex col">
+		<img src="../../../assets/images/thefrontline.png" width="130" height="130">
+	</ul>
 
-  <ul class="nav navbar-nav navbar-right ml-auto">
-
-   
-
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Settings
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-          <a class="dropdown-item" (click)="toggleTheme()">theme</a>
-           <div class="dropdown-divider"></div>
-        <a class="dropdown-item" >Upload Profile Picture</a>
-        <div class="dropdown-divider"></div>
-
-          <a class="dropdown-item" href="#">Report a user</a>
-        </div>
+	<ul class="nav navbar-nav navbar-right ml-auto">
+		<li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Settings </a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" (click)="toggleTheme()">Theme</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item">Upload Profile Picture</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Report a user</a>
+			</div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Sort By
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Most Recent</a>
-          <a class="dropdown-item" href="#">Followers</a>
-          <a class="dropdown-item" href="#">Date</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Other</a>
-
-
-        </div>
-      </li>
-
-
-
-      <input  [(ngModel)]="searchText" placeholder="search text goes here" (change)="filterPosts()" class="form-control mr-sm-2"
-        aria-label="Search">
-     
-    
-
-  </ul>
-
-
+      
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false"> Sort By </a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="#">Most Recent</a> 
+				<a class="dropdown-item" href="#">Followers</a> 
+				<a class="dropdown-item" href="#">Date</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Other</a>
+			</div>
+			</li>
+      <input [(ngModel)]="searchText" placeholder="search text goes here" (change)="filterPosts()" class="form-control mr-sm-2"
+      aria-label="Search">
+	</ul>
+	
 </nav>
+
 <br>
+
 <div class="container">
-  <div class="row">
-
-    <!-- Left Nav-->
-    <div class="col-3">
-      <div class="w3-sidebar w3-light-grey  w3-bar-block" style="width:25%;left: 0%">
-        <h3 class="w3-bar-item">User Profile</h3>
-        <a class="round-circle"></a>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users" (click)="message(user)" data-toggle="modal" data-target="#exampleModal" 
-            (click)="frame.show()" mdbWavesEffect>
-              <td>{{ user.firstName }} {{ user.lastName }} </td>
-            </tr>
-          </tbody>
-        </table>
-    
-<!-- Modal 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient: {{ user.firstName }} {{ user.lastName }} </label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
+	<div class="row">
+		<!-- Left Nav-->
+		<div class="col-3">
+			<div  class="sidenav" style="width: 25%; left: 0%">
+				<h3 class="w3-bar-item">User Profile</h3>
+				<img src="{{x.resp['image']}}" class="rounded-circle userimgsize" alt="Image Not Available"> <input type="text" class="form-control" placeholder="Please enter URL of image" id="image" [(ngModel)]="imgUploadStr" required="required">
+				<button (click)="uploadImage()">Upload Profile Picture</button>
+				<a class="round-circle"></a>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let user of users">
+							<td>{{ user.firstName }} {{ user.lastName }}</td>
+						</tr>
+					</tbody>
+				</table>
 
 
-<!-- Left Nav-->
-=======
->>>>>>> origin/v3
-
-    <!-- Page Content -->
-    <div class="col-6">
-      <h1>Home Page</h1>
+			</div>
+		</div>
 
 
-   <!-- Page Content -->
-   <div class="col-6">
-    <h1>Home Page</h1>
-  
-  
-  <div class="container posts">
-  <h2>Posts</h2>
-  
-  <!--<div class="postAdd">
-          <form >
-    <div class="input-group mb-1"  >
-            <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post" [(ngModel)]="post.body"></textarea>
-            <div class="input-group-append">
-
-            </div>
-          </form>
-<<<<<<< HEAD
-  </div>-->
-
-  <div class="postShow">
+		<!-- Page Content -->
+		<div class="col-6">
+			<h1>Home Page</h1>
 
 
-          <ul class="list-group">
-<!--  [disabled]="clicked"  -->
-            <li class="card list-group-item" *ngFor="let post of posts">
-<div >
-              <div class="card-header">
-                {{ post.user.firstName }} {{ post.user.lastName }}
-              </div>
-              <div class="card-body">
-                <p id="postShowBody" class="card-text">{{ post.body }}</p>
-              </div>
-              <div class="card-footer text-muted">
-                <div class="input-group mb-1">
-                  <!--  *ngIf="showComment" -->
-                  <textarea type="text" placeholder="Comment"  [ngStyle]="{'background-color': showComment ? 'green': 'red'}" (click)="toggleComment()"  [(ngModel)]="newcomment.body"></textarea>
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="toggleComment()" (click)="addComment(post)">Say it!</button>
+			<div class="container posts">
+				<h2>Posts</h2>
+
+				<div class="postAdd">
+
+					<div class="input-group mb-1">
+						<textarea id="newPost" type="text" class="form-control"
+							placeholder="Add a post" [(ngModel)]="post.body"></textarea>
+						<div class="input-group-append">
+							<button routerLink="/addPost" class="btn btn-outline-secondary"
+								(click)="posting()" type="button" id="addPostButton">Post</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="postShow">
+
+					<ul class="list-group">
+
+						<li class="card list-group-item" *ngFor="let post of posts"
+							(click)="toggleComment(post); clicked=true">
+							<div>
+
+								<div class="card-header">{{ post.user.firstName }} {{
+									post.user.lastName }}</div>
+								<div class="card-body">
+									<p id=postShowBody class="card-text">{{ post.body }}</p>
+								</div>
+								<div class="card-footer text-muted">
+									<div class="input-group mb-1">
+
+										<textarea type="text" placeholder="Comment"
+											[(ngModel)]="newcomment.body"></textarea>
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button"
+												id="addComButton">Say it!</button>
 
 
-                    <button><img src="../../../assets/images/thumbsup.png" width="30" height="30" value=1></button>
-                    <button><img src="../../../assets/images/thumbsdown.png" width="30" height="30" value=2></button>
-                    <button> <img src="../../../assets/images/smile.png" width="30" height="30" value=3></button>
-                    <button (click)="addReport(post)"> <img src="../../../assets/images/exclamation.png" width="30" height="30" value=1></button>
+											<button>
+												<img src="../../../assets/images/thumbsup.png" width="30"
+													height="30" value=1>
+											</button>
+											<button>
+												<img src="../../../assets/images/thumbsdown.png" width="30"
+													height="30" value=2>
+											</button>
+											<button>
+												<img src="../../../assets/images/smile.png" width="30"
+													height="30" value=3>
+											</button>
+											<button (click)="addReport(post)">
+												<img src="../../../assets/images/exclamation.png" width="30"
+													height="30" value=1>
+											</button>
 
 
-                  </div>
-                </div>
-                <div class="showCommentl" *ngFor="let postcomment of comments">
-                  <div *ngIf="post.postId==postcomment.postId.postId">
-            <li class="list-group-item">
-              <b>@{{postcomment.userId.firstName}}</b> {{postcomment.body}}
-            </li>
-        </div>
-      </div>
+										</div>
 
-
-    </div>
-
-          
-
- 
-
-
+									</div>
+									<div class="showCommentl" *ngFor="let postcomment of comments">
+										<div *ngIf="post.postId==postcomment.postId.postId">
+											<li class="list-group-item"><b>@{{postcomment.userId.firstName}}</b> {{postcomment.body}}</li>
+										</div>
+									</div>
+							
+       
+					
+				</div>
+		</div>
+		<!-- Right Nav-->
+		<div class="col-3">
+			<div class="sidenav" style="width: 25%; right: 0%">
+				<h4 class="w3-bar-item">Weather in {{theWeather.name}}</h4>
+				<ul class="list-group w3-light-grey">
+					<!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
+          <li class="list-group-item w3-light-grey">{{theWeather.main.temp}} °C </li>
+          <li class="list-group-item w3-light-grey">{{theWeather.weather[0].main}}, {{theWeather.weather[0].description}}</li>
+					<li class="list-group-item w3-light-grey"></li>
+				</ul>
+			</div>
+	
+   
 </div>
-<!-- Right Nav-->
-<div class="col-3">
-  <div class=" w3-light-grey  w3-bar-block">
-    <h4 class="w3-bar-item">Weather in {{theWeather.name}} </h4>
-    <ul class="list-group w3-light-grey">
-      <!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
-       <li class="list-group-item w3-light-grey">{{theWeather.main.temp}} °C</li>
-      <li class="list-group-item w3-light-grey">{{theWeather.weather[0].main}}, {{theWeather.weather[0].description}}</li>
-     
-    </ul>
-  </div>
-</div>
-</div>
-</div>
-
-    

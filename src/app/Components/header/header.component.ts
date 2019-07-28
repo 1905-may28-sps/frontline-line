@@ -112,7 +112,7 @@ export class HeaderComponent implements OnInit {
 
         }
         else {
-          console.log('Error loading posts, null value sent back')
+          console.log('Error loading posts, null value sent back');
         }
       },
       error => console.log('something unexpected happened')

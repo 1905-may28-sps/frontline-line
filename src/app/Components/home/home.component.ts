@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import {
-  faLightbulb as faSolidLightbulb,
-  IconDefinition
-} from "@fortawesome/free-solid-svg-icons";
-import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+// import {
+//   faLightbulb as faSolidLightbulb,
+//   IconDefinition
+// } from "@fortawesome/free-solid-svg-icons";
+// import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { ThemeService } from "src/app/theme/theme.service";
 
 import { UserService } from '../../service/user.service';
@@ -20,8 +20,8 @@ import { ReportType } from 'src/app/model/report-type';
 
 
 
-import {MessageService} from 'src/app/service/message.service';
-import {Message} from 'src/app/model/message.model';
+// import {MessageService} from 'src/app/service/message.service';
+// import {Message} from 'src/app/model/message.model';
 
 
 
@@ -44,26 +44,25 @@ export class HomeComponent implements OnInit {
  
   loggedUser: User = new User();
   theWeather: [];
-  x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
+  x:User = JSON.parse(localStorage.getItem('currentUser'));
 i:number=0;
 
-  posts: Post[]=[];
   post: Post=new Post();
 
   searchText: string = '';
 
 
-  imageSrc = ''
+  imageSrc = '';
 
-faLightbulb: IconDefinition;
+// faLightbulb: IconDefinition;
 
-  constructor(private messageService: MessageService, private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
+  constructor( private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
 
     console.log('in user service constructor')
   }
 
   ngOnInit() {
-    this.setLightbulb();
+    // this.setLightbulb();
     this.getUsers();
     this.getPosts();
 
@@ -79,14 +78,14 @@ faLightbulb: IconDefinition;
 
  
 
-    setLightbulb() {
-    if (this.themeService.isDarkTheme()) {
-      this.faLightbulb = faRegularLightbulb;
-    } else {
-      this.faLightbulb = faSolidLightbulb;
-    }
+  //   setLightbulb() {
+  //   if (this.themeService.isDarkTheme()) {
+  //     this.faLightbulb = faRegularLightbulb;
+  //   } else {
+  //     this.faLightbulb = faSolidLightbulb;
+  //   }
 
-  }
+  // }
 
   toggleTheme() {
     if (this.themeService.isDarkTheme()) {
@@ -94,7 +93,7 @@ faLightbulb: IconDefinition;
     } else {
       this.themeService.setDarkTheme();
     }
-this.setLightbulb();
+// this.setLightbulb();
   }
 
 
@@ -186,11 +185,6 @@ this.setLightbulb();
 
   }
 
-
-
-
-
-
    
     getUsers(){
       this.userService.getUsers().subscribe(
@@ -236,8 +230,7 @@ this.setLightbulb();
         }
       )
     }
-  }
-
+  
 
   filterPosts(){
     this.posts = this.posts.filter(it => {
@@ -249,7 +242,7 @@ this.setLightbulb();
       return test ;
     });
   }
-
+}
 //   getMessages (){
 //   this.messageService.getMessages().subscribe(
 //     resp => {
