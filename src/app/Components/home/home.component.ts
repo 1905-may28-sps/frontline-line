@@ -196,25 +196,26 @@ export class HomeComponent implements OnInit {
   }
   uploadImage() {
     //need to grab
-    
     console.log(this.imgUploadStr);
-    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.loggedUser.resp["image"] = this.imgUploadStr;
-/*    let objimage = {
-      username: y.resp['username'],
-      password: y.resp['password'],
-      firstName: y.resp['firstName'],
-      lastName: y.resp['lastName'],
-      image: this.imgUploadStr,
-      userId: y.resp['userId']
-    }
-*/
-    console.log("crated obk");
-    console.log(this.loggedUser.resp);
-    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+    let luser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(luser);
+    luser.image = this.imgUploadStr;
+   
+    //this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("read ")
+    console.log(luser);
+    //console.log(this.loggedUser);
+    //removed .resp
+    
+    //this.loggedUser["image"] = this.imgUploadStr;
+
+    //removed resp
+
+    this.userService.uploadImage(luser).subscribe(
       resp => {
         console.log(resp);
-        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        localStorage.setItem('currentUser', JSON.stringify(resp));
+        console.log("check lclsttrge after upload");
         console.log(localStorage);
         location.reload();
         this.router.navigate(['/homepage']);

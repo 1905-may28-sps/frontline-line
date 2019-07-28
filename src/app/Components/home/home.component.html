@@ -51,11 +51,12 @@
       <div class="w3-sidebar w3-light-grey ">
         <h3 class="w3-bar-item">User Profile</h3>
 
-        <img src="{{x.resp['image']}}" class="rounded-circle userimgsize" alt="Image Not Available">
+        <!-- removed .resp from x-->
+        <img src="{{x['image']}}" class="rounded-circle userimgsize" alt="Image Not Available">
 
         <input type="text" class="form-control" placeholder="Please enter URL of image"
                id="image" [(ngModel)]="imgUploadStr" required="required">
-        
+
         <button (click)="uploadImage()">Upload Profile Picture</button>
 
         <a class="round-circle"></a>

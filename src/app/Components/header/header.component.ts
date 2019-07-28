@@ -36,11 +36,13 @@ export class HeaderComponent implements OnInit {
         console.log(this.loggedUser);
         if (resp != null) {
           this.loggedUser = resp;
-          localStorage.setItem('currentUser', JSON.stringify({ resp }));
+          //made changes here to deal with the resp issue(7/27)
+          localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
+          console.log(localStorage);
           console.log("logged in checker");
           console.log(localStorage.length);
           var x = JSON.parse(localStorage.getItem('currentUser'));
-          console.log(x.resp['image']);
+          //console.log(x.resp['image']);
           this.router.navigate(['/homepage']);
         }
         else {
