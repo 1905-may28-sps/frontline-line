@@ -11,12 +11,17 @@ import { UserService } from '../../service/user.service';
 import { User } from 'src/app/model/user.model';
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
+
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
 import { Report } from 'src/app/model/report';
 import { ReportService } from 'src/app/service/report.service';
 import { ReportType } from 'src/app/model/report-type';
 
+
+
+import {MessageService} from 'src/app/service/message.service';
+import {Message} from 'src/app/model/message.model';
 
 
 
@@ -27,6 +32,7 @@ import { ReportType } from 'src/app/model/report-type';
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
+
   posts: Post[] = [];
   comments: Comment[] = [];
   newpost: Post = new Post();
@@ -40,12 +46,18 @@ export class HomeComponent implements OnInit {
   theWeather: [];
   x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
 i:number=0;
-  imageSrc = ''
-<<<<<<< HEAD
+
+  posts: Post[]=[];
+  post: Post=new Post();
+
   searchText: string = '';
+
+
+  imageSrc = ''
+
 faLightbulb: IconDefinition;
 
-  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
+  constructor(private messageService: MessageService, private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
 
     console.log('in user service constructor')
   }
@@ -54,6 +66,7 @@ faLightbulb: IconDefinition;
     this.setLightbulb();
     this.getUsers();
     this.getPosts();
+
     this.getComments();
     this.getweather();
   }
@@ -86,17 +99,6 @@ this.setLightbulb();
 
 
 
- 
-  filterPosts(){
-    this.posts = this.posts.filter(it => {
-      console.log('In filter post');
-      this.searchText = this.searchText.toLowerCase();
-      let test =  it.body.toLowerCase().includes(this.searchText);
-      console.log(it.body + test);
-      console.log(this.searchText);
-      return test ;
-    });
-  }
   getComments() {
     this.commentService.getComments().subscribe(
       resp => {
@@ -235,3 +237,49 @@ this.setLightbulb();
       )
     }
   }
+
+
+  filterPosts(){
+    this.posts = this.posts.filter(it => {
+      console.log('In filter post');
+      this.searchText = this.searchText.toLowerCase();
+      let test =  it.body.toLowerCase().includes(this.searchText);
+      console.log(it.body + test);
+      console.log(this.searchText);
+      return test ;
+    });
+  }
+
+//   getMessages (){
+//   this.messageService.getMessages().subscribe(
+//     resp => {
+//       if(resp != null){
+//         console.log(resp);
+//         this.messages = resp;
+//       }
+//       else{
+//         console.log('Error loading message, null value sent back')
+//       }
+//     },
+//     error => console.log('something unexpected happened')
+//   );
+// }
+
+// addMessage(){
+//     console.log("In adding a message");
+//     console.log(this.message);
+//     this.messageService.addMessage(this.message).subscribe(
+//       resp=>{
+//         console.log(resp);
+//         this.messages.push(resp);
+//         this.message=new Message();
+//       },
+//       error=>{
+//         console.log('failed at post');
+//       }
+
+
+//     )
+//   }
+ 
+

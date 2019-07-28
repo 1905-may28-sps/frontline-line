@@ -2,6 +2,7 @@
     background-color:#5dc083,0.5;   
 }
 .w3-container{
+<<<<<<< HEAD
     background-color:#5dc083,0.5;
 }
 
@@ -20,3 +21,9 @@ nav {
     margin-left: auto;
     margin-right: auto;
   }
+
+.w3-sidebar{
+    float:inline-start;
+    padding: 15px;
+}
+
