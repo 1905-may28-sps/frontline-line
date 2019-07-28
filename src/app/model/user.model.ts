@@ -11,7 +11,7 @@ export class User{
     roleId:Role;
     image: string;
     bannedId: Banned;
-    themeId: Theme;
+  themeId: Theme;
+  //what is this for?
   resp: any;
 }
- 

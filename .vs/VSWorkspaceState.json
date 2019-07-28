@@ -6,10 +6,16 @@
     "\\src\\app",
     "\\src\\app\\Components",
     "\\src\\app\\Components\\header",
+<<<<<<< HEAD
     "\\src\\app\\Components\\home",
     "\\src\\app\\model",
     "\\src\\app\\service"
   ],
   "SelectedNode": "\\src\\app\\Components\\header\\header.component.ts",
+=======
+    "\\src\\app\\Components\\home"
+  ],
+  "SelectedNode": "\\src\\app\\Components\\home\\home.component.ts",
+>>>>>>> frankbranch
   "PreviewInSolutionExplorer": false
 }

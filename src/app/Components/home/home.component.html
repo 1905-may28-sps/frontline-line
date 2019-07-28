@@ -1,4 +1,5 @@
 
+
 <input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
 <button (click)="logout()">Logout</button>
 
@@ -10,13 +11,15 @@
 	<ul class="nav navbar-nav navbar-right ml-auto">
 		<li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Settings </a>
-			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" (click)="toggleTheme()">Theme</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item">Upload Profile Picture</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Report a user</a>
-			</div>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" (click)="toggleTheme()">Theme</a>
+        <div class="dropdown-divider"></div>
+        <!--
+          <a class="dropdown-item">Upload Profile Picture</a>
+          <div class="dropdown-divider"></div>
+        -->
+        <a class="dropdown-item" href="#">Report a user</a>
+      </div>
       </li>
       
 		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="Sort" role="button" data-toggle="dropdown"
@@ -43,7 +46,7 @@
 		<div class="col-3">
 			<div  class="sidenav" style="width: 25%; left: 0%">
 				<h3 class="w3-bar-item">User Profile</h3>
-				<img src="{{x.resp['image']}}" class="rounded-circle userimgsize" alt="Image Not Available"> <input type="text" class="form-control" placeholder="Please enter URL of image" id="image" [(ngModel)]="imgUploadStr" required="required">
+				<img src="{{x['image']}}" class="rounded-circle userimgsize" alt="Image Not Available"> <input type="text" class="form-control" placeholder="Please enter URL of image" id="image" [(ngModel)]="imgUploadStr" required="required">
 				<button (click)="uploadImage()">Upload Profile Picture</button>
 				<a class="round-circle"></a>
 				<table class="table">
@@ -69,76 +72,82 @@
 			<h1>Home Page</h1>
 
 
-			<div class="container posts">
-				<h2>Posts</h2>
+      <div class="container posts">
+        <h2>Posts</h2>
 
-				<div class="postAdd">
+        <div class="postAdd">
 
-					<div class="input-group mb-1">
-						<textarea id="newPost" type="text" class="form-control"
-							placeholder="Add a post" [(ngModel)]="post.body"></textarea>
-						<div class="input-group-append">
-							<button routerLink="/addPost" class="btn btn-outline-secondary"
-								(click)="posting()" type="button" id="addPostButton">Post</button>
-						</div>
-					</div>
-				</div>
+          <div class="input-group mb-1">
+            <textarea id="newPost" type="text" class="form-control"
+                      placeholder="Add a post" [(ngModel)]="post.body"></textarea>
+            <div class="input-group-append">
+              <button routerLink="/addPost" class="btn btn-outline-secondary"
+                      (click)="posting()" type="button" id="addPostButton">
+                Post
+              </button>
+            </div>
+          </div>
+        </div>
 
-				<div class="postShow">
+        <div class="postShow">
 
-					<ul class="list-group">
+          <ul class="list-group">
 
-						<li class="card list-group-item" *ngFor="let post of posts"
-							(click)="toggleComment(post); clicked=true">
-							<div>
+            <li class="card list-group-item" *ngFor="let post of posts"
+                (click)="toggleComment(post); clicked=true">
 
-								<div class="card-header">{{ post.user.firstName }} {{
-									post.user.lastName }}</div>
-								<div class="card-body">
-									<p id=postShowBody class="card-text">{{ post.body }}</p>
-								</div>
-								<div class="card-footer text-muted">
-									<div class="input-group mb-1">
+              <div>
 
-										<textarea type="text" placeholder="Comment"
-											[(ngModel)]="newcomment.body"></textarea>
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" type="button"
-												id="addComButton">Say it!</button>
-
-
-											<button>
-												<img src="../../../assets/images/thumbsup.png" width="30"
-													height="30" value=1>
-											</button>
-											<button>
-												<img src="../../../assets/images/thumbsdown.png" width="30"
-													height="30" value=2>
-											</button>
-											<button>
-												<img src="../../../assets/images/smile.png" width="30"
-													height="30" value=3>
-											</button>
-											<button>
-												<img src="../../../assets/images/exclamation.png" width="30"
-													height="30" value=1>
-											</button>
-
-
-										</div>
-
-									</div>
-									<div class="showCommentl" *ngFor="let postcomment of comments">
-										<div *ngIf="post.postId==postcomment.postId.postId">
-											<li class="list-group-item"><b>@{{postcomment.userId.firstName}}</b>
-												{{postcomment.body}}</li>
-										</div>
-									</div>
-							
-						
-					
-				</div>
-		</div>
+                <div class="card-header">
+                  {{ post.user.firstName }} {{
+									post.user.lastName
+                  }}
+                </div>
+                <div class="card-body">
+                  <p id=postShowBody class="card-text">{{ post.body }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                  <div class="input-group mb-1">
+                    <textarea type="text" placeholder="Comment"
+                              [(ngModel)]="newcomment.body"></textarea>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button"
+                              id="addComButton">
+                        Say it!
+                      </button>
+                      <button>
+                        <img src="../../../assets/images/thumbsup.png" width="30"
+                             height="30" value=1>
+                      </button>
+                      <button>
+                        <img src="../../../assets/images/thumbsdown.png" width="30"
+                             height="30" value=2>
+                      </button>
+                      <button>
+                        <img src="../../../assets/images/smile.png" width="30"
+                             height="30 " value=3>
+                      </button>
+                      <button>
+                        <img src="../../../assets/images/exclamation.png" width="30"
+                             height="30" value=1>
+                      </button>
+                    </div>
+                  </div>
+             
+                    
+                  <div class="showCommentl" *ngFor="let postcomment of comments">
+                    <div *ngIf="post.postId==postcomment.postId.postId">
+                      <ul>
+                        <li class="list-group-item"> <b>@{{postcomment.userId.firstName}}</b>{{postcomment.body}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </ul>
+        </div>
+      </div>
+    </div>
 		<!-- Right Nav-->
 		<div class="col-3">
 			<div class="sidenav" style="width: 25%; right: 0%">
@@ -150,6 +159,5 @@
 					<li class="list-group-item w3-light-grey"></li>
 				</ul>
 			</div>
-	
-   
+	  </div>
 </div>

@@ -5,10 +5,6 @@ import { Router } from "@angular/router"
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
 
-//import { Router } from '@angular/router';
-
-
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,24 +20,26 @@ export class HeaderComponent implements OnInit {
 
 
 
-  constructor(private userService: UserService, private router: Router,private postService: PostService) { }
+  constructor(private userService: UserService, private router: Router, private postService: PostService) { }
 
   ngOnInit() {
-    this.displayLogInOut();
     this.getPosts();
 
   }
+
   postLogin() {
     this.userService.postLogin(this.loggedUser).subscribe(
       resp => {
         console.log(this.loggedUser);
         if (resp != null) {
           this.loggedUser = resp;
-          localStorage.setItem('currentUser', JSON.stringify({ resp }));
+          //made changes here to deal with the resp issue(7/27)
+          localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
+          console.log(localStorage);
           console.log("logged in checker");
           console.log(localStorage.length);
           var x = JSON.parse(localStorage.getItem('currentUser'));
-          console.log(x.resp['image']);
+          //console.log(x.resp['image']);
           this.router.navigate(['/homepage']);
         }
         else {
@@ -88,19 +86,6 @@ export class HeaderComponent implements OnInit {
     )
   }
 
-  displayLogInOut() {
-    if (localStorage.length == 0) {
-      //show login / signup
-
-      // hide logout
-
-    }
-    else {
-      //hide login signup
-      //show logout
-    }
-  }
-
 
   getPosts() {
     this.postService.getPosts().subscribe(
@@ -117,14 +102,4 @@ export class HeaderComponent implements OnInit {
       error => console.log('something unexpected happened')
     );
   }
-
-
-
-
-
-  }
-
-
-
-
-
+}

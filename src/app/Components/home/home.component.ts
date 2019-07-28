@@ -34,12 +34,11 @@ export class HomeComponent implements OnInit {
   imgUploadStr = '';
   loggedUser: User = new User();
   theWeather: [];
-  x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
-
+  //x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
+  //getting rid of the .resp
+  x: User = JSON.parse(localStorage.getItem('currentUser'));
   imageSrc = ''
   //faLightbulb: IconDefinition;
-
-
   constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService, private router: Router) { 
     console.log('in user service constructor')
   }
@@ -60,11 +59,11 @@ export class HomeComponent implements OnInit {
   getUsers(){
     this.userService.getUsers().subscribe(
       resp => {
-        if(resp != null){
+        if (resp != null) {
           this.users = resp;
           console.log(this.users);
         }
-        else{
+        else {
           console.log('Error loading users, null value sent back')
         }
       },
@@ -72,6 +71,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
+ 
 
   getPosts(){
     this.postService.getPosts().subscribe(
@@ -107,7 +107,6 @@ export class HomeComponent implements OnInit {
       }
     )
   }
-
   filterPosts(){
     this.posts = this.posts.filter(it => {
       console.log('In filter post');
@@ -118,6 +117,7 @@ export class HomeComponent implements OnInit {
       return test ;
     });
   }
+  
 
   // setLightbulb() {
   //   if (this.themeService.isDarkTheme()) {
@@ -168,6 +168,7 @@ export class HomeComponent implements OnInit {
     )
   }
 
+
   getweather(){
     this.userService.getWeather().subscribe(
       resp => {
@@ -192,25 +193,17 @@ export class HomeComponent implements OnInit {
   }
   uploadImage() {
     //need to grab
-    
-    console.log(this.imgUploadStr);
-    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.loggedUser.resp["image"] = this.imgUploadStr;
-/*    let objimage = {
-      username: y.resp['username'],
-      password: y.resp['password'],
-      firstName: y.resp['firstName'],
-      lastName: y.resp['lastName'],
-      image: this.imgUploadStr,
-      userId: y.resp['userId']
-    }
-*/
-    console.log("crated obk");
-    console.log(this.loggedUser.resp);
-    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+    //console.log(this.imgUploadStr);
+    let luser = JSON.parse(localStorage.getItem('currentUser'));
+    //console.log(luser);
+    luser.image = this.imgUploadStr;
+    //console.log(luser);
+    //removed resp
+    this.userService.uploadImage(luser).subscribe(
       resp => {
         console.log(resp);
-        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        localStorage.setItem('currentUser', JSON.stringify(resp));
+        console.log("check lclsttrge after upload");
         console.log(localStorage);
         location.reload();
         this.router.navigate(['/homepage']);
@@ -224,3 +217,4 @@ export class HomeComponent implements OnInit {
 
 
 }
+
