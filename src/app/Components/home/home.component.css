@@ -5,6 +5,17 @@
     background-color:#5dc083,0.5;
 }
 
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 25%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 38%; /* Stay at the top */
+  background-color: lightgrey; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
 nav {
     height: 4rem;
     display: flex;
