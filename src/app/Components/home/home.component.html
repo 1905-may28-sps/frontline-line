@@ -1,3 +1,4 @@
+﻿<input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
 <nav class="navbar navbar-expand-lg navbar-theme">
   <ul class="navbar-header d-flex col">
     <img src="../../../assets/images/thefrontline.png" width="130" height="130">
@@ -11,10 +12,10 @@
           Settings
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Theme 1</a>
-          <a class="dropdown-item" href="#">Theme 2</a>
-          <a class="dropdown-item" href="#">Theme 3</a>
-          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="toggleTheme()">theme</a>
+           <div class="dropdown-divider"></div>
+        <a class="dropdown-item" >Upload Profile Picture</a>
+        <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Report a user</a>
         </div>
       </li>
@@ -36,97 +37,73 @@
       <input [(ngModel)]="searchText" placeholder="search text goes here" (change)="filterPosts()" class="form-control mr-sm-2"
       aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <li class="nav-item">
-        <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
-        <ul class="dropdown-menu form-wrapper">					
-            <li>
-               
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username" required="required" [(ngModel)]="loggedUser.username">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required="required" [(ngModel)]="loggedUser.password">
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-block" value="Login" (click)="postLogin()">
-               
-            </li>
-        </ul>
-    </li>
-    <li class="nav-item">
-        <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
-        <ul class="dropdown-menu form-wrapper">					
-            <li>
-               
-                    <p class="hint-text">Fill in this form to create your account!</p>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username" required="required">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required="required">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirm Password" required="required">
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-block" value="Sign up">
-          
-            </li>
-        </ul>
-    </li>
-    
+      
 
   </ul>
+
 
 </nav>
 <br>
 <div class="container">
   <div class="row">
-    <!-- Left Nav-->
-    <div class="col-3">
-      <div class="w3-sidebar w3-light-grey ">
-        <h3 class="w3-bar-item">User Profile</h3>
-        <a class="round-circle"></a>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users">
-              <td>{{ user.firstName }} {{ user.lastName }} </td>
-            </tr>
-          </tbody>
-        </table>
 
-      </div>
-    </div>
+
 
     <!-- Left Nav-->
 
 
-    <!-- Page Content -->
-    <div class="col-6">
-      <h1>Home Page</h1>
+    
+
+<div class="col-3">
+          <div class="w3-sidebar w3-light-grey ">
+                          <h3 class="w3-bar-item">User Profile</h3>
+                          <button
 
 
-      <div class="container posts">
-        <h2>Posts</h2>
+                          <a class="round-circle"></a>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let user of users">
+                                <td>{{ user.firstName }} {{ user.lastName }} </td>
+                              </tr>
+                            </tbody>
+                          </table>
 
-        <div class="postAdd">
-          
-            <div class="input-group mb-1">
-              <textarea id="newPost" type="text" placeholder="Add a post"
-                [(ngModel)]="newpost.body"></textarea>
-              <div class="input-group-append">
-                <button routerLink="/addPost" class="btn btn-outline-secondary" (click)="posting()" type="button"
-                  id="addPostButton">Post</button>
-              </div>
+                  </div>
+
+
+</div>
+
+
+<!-- Left Nav-->
+
+
+   <!-- Page Content -->
+   <div class="col-6">
+    <h1>Home Page</h1>
+  
+  
+  <div class="container posts">
+  <h2>Posts</h2>
+  
+  <!--<div class="postAdd">
+          <form >
+    <div class="input-group mb-1"  >
+            <textarea   id="newPost" type="text" class="form-control" placeholder="Add a post" [(ngModel)]="post.body"></textarea>
+            <div class="input-group-append">
+            <button routerLink="/addPost" class="btn btn-outline-secondary"  (click)="addPost()" type="button" id="addPostButton">Post</button>
             </div>
-          
-        </div>
+          </div>
+          </form>
+  </div>-->
 
-        <div class="postShow">
+  <div class="postShow">
+
 
           <ul class="list-group">
 <!--  [disabled]="clicked"  -->
@@ -165,12 +142,10 @@
 
     </div>
 
-</div>
-    </li>
+          
 
-    </ul>
-  </div>
-</div>
+ 
+
 
 </div>
 <!-- Right Nav-->
@@ -181,10 +156,14 @@
       <!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
        <li class="list-group-item w3-light-grey">{{theWeather.main.temp}} °C</li>
       <li class="list-group-item w3-light-grey">{{theWeather.weather[0].main}}, {{theWeather.weather[0].description}}</li>
-      <li  class="list-group-item w3-light-grey"></li>
      
     </ul>
   </div>
 </div>
 </div>
 </div>
+
+
+
+
+

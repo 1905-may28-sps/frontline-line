@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+
+import {
+  faLightbulb as faSolidLightbulb,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { ThemeService } from "src/app/theme/theme.service";
+
 import { UserService } from '../../service/user.service';
 import { User } from 'src/app/model/user.model';
 import { PostService } from 'src/app/service/post.service';
@@ -8,6 +16,7 @@ import { Comment } from 'src/app/model/comment';
 import { Report } from 'src/app/model/report';
 import { ReportService } from 'src/app/service/report.service';
 import { ReportType } from 'src/app/model/report-type';
+
 
 
 
@@ -32,13 +41,17 @@ export class HomeComponent implements OnInit {
   x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
 i:number=0;
   imageSrc = ''
+<<<<<<< HEAD
   searchText: string = '';
+faLightbulb: IconDefinition;
 
-  constructor(private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
+
     console.log('in user service constructor')
   }
 
   ngOnInit() {
+    this.setLightbulb();
     this.getUsers();
     this.getPosts();
     this.getComments();
@@ -51,57 +64,29 @@ i:number=0;
     console.log(this.showComment1+""+ (this.i)++);
   }
 
-  getUsers() {
-    this.userService.getUsers().subscribe(
-      resp => {
-        if (resp != null) {
-          this.users = resp;
-          console.log(this.users);
-        }
-        else {
-          console.log('Error loading users, null value sent back')
-        }
-      },
-      error => console.log('something unexpected happened')
-    );
+ 
+
+    setLightbulb() {
+    if (this.themeService.isDarkTheme()) {
+      this.faLightbulb = faRegularLightbulb;
+    } else {
+      this.faLightbulb = faSolidLightbulb;
+    }
+
+  }
+
+  toggleTheme() {
+    if (this.themeService.isDarkTheme()) {
+      this.themeService.setLightTheme();
+    } else {
+      this.themeService.setDarkTheme();
+    }
+this.setLightbulb();
   }
 
 
-  getPosts() {
-    this.postService.getPosts().subscribe(
-      resp => {
-        if (resp != null) {
-          this.posts = resp;
-          console.log(this.posts);
 
-        }
-        else {
-          console.log('Error loading posts, null value sent back')
-        }
-      },
-      error => console.log('something unexpected happened')
-    );
-  }
-
-  posting() {
-    console.log(this.newpost);
-    // console.log(HeaderComponent.arguments.loggedUser);
-    // this.post.user=HeaderComponent.arguments.loggedUser;
-    // this.newpost.user=this.loggedUser;
-    this.newpost.user=this.x;
-
-    this.postService.addPost(this.newpost).subscribe(
-      resp => {
-        console.log(resp);
-        this.posts.push(resp);
-        this.newpost = new Post();
-      },
-      
-      error => {
-        console.log('failed at post');
-      }
-    )
-  }
+ 
   filterPosts(){
     this.posts = this.posts.filter(it => {
       console.log('In filter post');
@@ -202,4 +187,51 @@ i:number=0;
 
 
 
-}
+
+
+   
+    getUsers(){
+      this.userService.getUsers().subscribe(
+        resp => {
+          if (resp != null) {
+            this.users = resp;
+            console.log(this.users);
+          }
+          else {
+            console.log('Error loading users, null value sent back')
+          }
+        },
+        error => console.log('something unexpected happened')
+      );
+    }
+
+
+    getPosts(){
+      this.postService.getPosts().subscribe(
+        resp => {
+          if (resp != null) {
+            this.posts = resp;
+            console.log(this.posts);
+          }
+          else {
+            console.log('Error loading posts, null value sent back')
+          }
+        },
+        error => console.log('something unexpected happened')
+      );
+    }
+
+    addPost(){
+      console.log(this.post);
+      this.postService.addPost(this.post).subscribe(
+        resp => {
+          console.log(resp);
+          this.posts.push(resp);
+          this.post = new Post();
+        },
+        error => {
+          console.log('failed at post');
+        }
+      )
+    }
+  }
