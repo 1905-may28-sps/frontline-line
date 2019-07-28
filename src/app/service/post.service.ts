@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class PostService {
 
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:8080/Project2/post';
+  url = 'http://localhost:8080/frontline/post';
   reqOptions = {
 
     headers: new HttpHeaders({'Content-Type' : 'application/json'}) 
@@ -25,7 +25,7 @@ export class PostService {
 
     // this.reqOptions.headers.append('test', 'test'); //if you have more headers
  
-     return this.http.post<Post>(`${this.url}`, post, this.reqOptions );
+     return this.http.post<Post>(`${this.url}`, post);
  
    }
 }

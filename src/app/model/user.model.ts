@@ -1,11 +1,17 @@
+import { Role } from './role';
+import { Theme } from './theme';
+import { Banned } from './banned';
+
 export class User{
     userId: number;
     username: string;
     password: string;
     firstName: string;
     lastName: string;
-    roleId:number;
+    roleId:Role;
     image: string;
-    bannedId: number;
-    themeId: number;
+    bannedId: Banned;
+    themeId: Theme;
+  resp: any;
 }
+ 

@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+//<import {
+  //faLightbulb as faSolidLightbulb,
+  //IconDefinition
+//}> from "@fortawesome/free-solid-svg-icons";
+
+//import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { ThemeService } from "src/app/theme/theme.service";
 import { UserService } from '../../service/user.service';
 import { User } from 'src/app/model/user.model';
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
 import {MessageService} from 'src/app/service/message.service';
-import {Message} from 'src/app/model/message.model';
+//import {Message} from 'src/app/model/message.model';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,18 +31,21 @@ export class HomeComponent implements OnInit {
   newcomment: Comment = new Comment();
   showComment: boolean = false;
   searchText: string = '';
-
+  imgUploadStr = '';
   loggedUser: User = new User();
   theWeather: [];
   x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
 
   imageSrc = ''
+  //faLightbulb: IconDefinition;
 
-  constructor(private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService) { 
+
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService, private router: Router) { 
     console.log('in user service constructor')
   }
 
   ngOnInit() {
+    //this.setLightbulb();
     this.getUsers();
     this.getPosts();
     this.getComments();
@@ -109,6 +119,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // setLightbulb() {
+  //   if (this.themeService.isDarkTheme()) {
+  //     this.faLightbulb = faRegularLightbulb;
+  //   } else {
+  //     this.faLightbulb = faSolidLightbulb;
+  //   }
+  // }
+
+  toggleTheme() { 
+    if (this.themeService.isDarkTheme()) {
+      this.themeService.setLightTheme();
+    } else {
+      this.themeService.setDarkTheme();
+    }
+
+    //this.setLightbulb();
+
+  }
   getComments() {
     this.commentService.getComments().subscribe(
       resp => {
@@ -140,24 +168,6 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  postLogin() {
-    this.userService.postLogin(this.loggedUser).subscribe(
-   
-      resp => {
-        console.log(resp);
-        if (resp != null) {
-          this.loggedUser = resp;
-          localStorage.setItem('currentUser', JSON.stringify({ resp }));
-        }
-        else {
-          console.log("fail login")
-        };
-      },
-      error => {
-        console.log('could not find user');
-      }
-    )
-  }
   getweather(){
     this.userService.getWeather().subscribe(
       resp => {
@@ -172,39 +182,45 @@ export class HomeComponent implements OnInit {
       error => console.log('something unexpected happened')
     );
 
+
+  }
+  logout() {
+    localStorage.removeItem('currentUser');
+    console.log(localStorage.length);
+    this.router.navigate(['/login']);
+
+  }
+  uploadImage() {
+    //need to grab
+    
+    console.log(this.imgUploadStr);
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.loggedUser.resp["image"] = this.imgUploadStr;
+/*    let objimage = {
+      username: y.resp['username'],
+      password: y.resp['password'],
+      firstName: y.resp['firstName'],
+      lastName: y.resp['lastName'],
+      image: this.imgUploadStr,
+      userId: y.resp['userId']
+    }
+*/
+    console.log("crated obk");
+    console.log(this.loggedUser.resp);
+    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+      resp => {
+        console.log(resp);
+        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        console.log(localStorage);
+        location.reload();
+        this.router.navigate(['/homepage']);
+      },
+      error => {
+        console.log('failed at registering');
+      }
+      )
   }
 
 
 
-//   getMessages (){
-//   this.messageService.getMessages().subscribe(
-//     resp => {
-//       if(resp != null){
-//         console.log(resp);
-//         this.messages = resp;
-//       }
-//       else{
-//         console.log('Error loading message, null value sent back')
-//       }
-//     },
-//     error => console.log('something unexpected happened')
-//   );
-// }
-
-// addMessage(){
-//     console.log("In adding a message");
-//     console.log(this.message);
-//     this.messageService.addMessage(this.message).subscribe(
-//       resp=>{
-//         console.log(resp);
-//         this.messages.push(resp);
-//         this.message=new Message();
-//       },
-//       error=>{
-//         console.log('failed at post');
-//       }
-
-
-//     )
-//   }
-  }
+}
