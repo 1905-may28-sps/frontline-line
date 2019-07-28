@@ -5,6 +5,9 @@ import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
+import { Report } from 'src/app/model/report';
+import { ReportService } from 'src/app/service/report.service';
+import { ReportType } from 'src/app/model/report-type';
 
 
 
@@ -20,16 +23,18 @@ export class HomeComponent implements OnInit {
   newpost: Post = new Post();
   newcomment: Comment = new Comment();
   showComment: boolean = false;
+  showComment1: boolean = false;
   //clicked = false;
+  newReport:Report = new Report();
  
   loggedUser: User = new User();
   theWeather: [];
   x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
-
+i:number=0;
   imageSrc = ''
   searchText: string = '';
 
-  constructor(private userService: UserService, private postService: PostService, private commentService: CommentService) {
+  constructor(private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
     console.log('in user service constructor')
   }
 
@@ -42,7 +47,8 @@ export class HomeComponent implements OnInit {
 
   toggleComment(post: Post) {
 
-    this.showComment = !this.showComment;
+    this.showComment1 = !this.showComment1;
+    console.log(this.showComment1+""+ (this.i)++);
   }
 
   getUsers() {
@@ -132,6 +138,28 @@ export class HomeComponent implements OnInit {
         this.newcomment = new Comment();
       }, error => {
         console.log('failed at comment');
+      }
+
+    )
+  }
+  addReport(post: Post) {
+    console.log(this.newReport);
+    this.newReport.post= post;
+    //this.newcomment.userId=this.loggedUser;
+    this.newReport.reporter=this.x;
+   
+  
+
+    // this.newReport.reportType={reportTypeId:1,reportType:1};
+    // this.newReport.reportType.reportType=1;
+    
+
+    this.reportService.addReport(this.newReport).subscribe(
+      resp => {
+        console.log(resp);
+        
+      }, error => {
+        console.log('failed at report');
       }
 
     )

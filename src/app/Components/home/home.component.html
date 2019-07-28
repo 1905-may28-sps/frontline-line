@@ -130,7 +130,7 @@
 
           <ul class="list-group">
 <!--  [disabled]="clicked"  -->
-            <li class="card list-group-item" *ngFor="let post of posts"(click)="toggleComment(post); clicked=true">
+            <li class="card list-group-item" *ngFor="let post of posts">
 <div >
               <div class="card-header">
                 {{ post.user.firstName }}
@@ -141,15 +141,15 @@
               <div class="card-footer text-muted">
                 <div class="input-group mb-1">
                   <!--  *ngIf="showComment" -->
-                  <textarea type="text" placeholder="Comment"   [(ngModel)]="newcomment.body"> </textarea>
+                  <textarea type="text" placeholder="Comment"  [ngStyle]="{'background-color': showComment ? 'green': 'red'}" (click)="toggleComment()"  [(ngModel)]="newcomment.body"></textarea>
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="addComment(post)">Say it!</button>
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleComment()" (click)="addComment(post)">Say it!</button>
 
 
                     <button><img src="../../../assets/images/thumbsup.png" width="30" height="30" value=1></button>
                     <button><img src="../../../assets/images/thumbsdown.png" width="30" height="30" value=2></button>
                     <button> <img src="../../../assets/images/smile.png" width="30" height="30" value=3></button>
-                    <button> <img src="../../../assets/images/exclamation.png" width="30" height="30" value=1></button>
+                    <button (click)="addReport(post)"> <img src="../../../assets/images/exclamation.png" width="30" height="30" value=1></button>
 
 
                   </div>
@@ -175,7 +175,7 @@
 </div>
 <!-- Right Nav-->
 <div class="col-3">
-  <div class="w3-sidebar w3-light-grey  w3-bar-block">
+  <div class=" w3-light-grey  w3-bar-block">
     <h4 class="w3-bar-item">Weather in {{theWeather.name}} </h4>
     <ul class="list-group w3-light-grey">
       <!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
