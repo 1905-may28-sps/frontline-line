@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-// import {
-//   faLightbulb as faSolidLightbulb,
-//   IconDefinition
-// } from "@fortawesome/free-solid-svg-icons";
-// import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+
+import {
+  faLightbulb as faSolidLightbulb,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { ThemeService } from "src/app/theme/theme.service";
 
 import { UserService } from '../../service/user.service';
@@ -14,6 +15,7 @@ import { Post } from 'src/app/model/post';
 
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
+
 import { Report } from 'src/app/model/report';
 import { ReportService } from 'src/app/service/report.service';
 import { ReportType } from 'src/app/model/report-type';
@@ -22,6 +24,8 @@ import { ReportType } from 'src/app/model/report-type';
 
 // import {MessageService} from 'src/app/service/message.service';
 // import {Message} from 'src/app/model/message.model';
+
+import { Router } from "@angular/router";
 
 
 
@@ -40,6 +44,7 @@ export class HomeComponent implements OnInit {
   showComment: boolean = false;
   showComment1: boolean = false;
   //clicked = false;
+
   newReport:Report = new Report();
  
   loggedUser: User = new User();
@@ -49,25 +54,29 @@ i:number=0;
 
   post: Post=new Post();
 
+  imgUploadStr = '';
+
   searchText: string = '';
+  faLightbulb: IconDefinition;
 
 
   imageSrc = '';
 
-// faLightbulb: IconDefinition;
-
-  constructor( private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
+  constructor( private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService, private router: Router) {
 
     console.log('in user service constructor')
   }
 
   ngOnInit() {
-    // this.setLightbulb();
+
+    this.setLightbulb();
+
     this.getUsers();
     this.getPosts();
 
     this.getComments();
     this.getweather();
+
   }
 
   toggleComment(post: Post) {
@@ -76,27 +85,37 @@ i:number=0;
     console.log(this.showComment1+""+ (this.i)++);
   }
 
- 
 
-  //   setLightbulb() {
-  //   if (this.themeService.isDarkTheme()) {
-  //     this.faLightbulb = faRegularLightbulb;
-  //   } else {
-  //     this.faLightbulb = faSolidLightbulb;
-  //   }
 
-  // }
+  filterPosts(){
+    this.posts = this.posts.filter(it => {
+      console.log('In filter post');
+      this.searchText = this.searchText.toLowerCase();
+      let test =  it.body.toLowerCase().includes(this.searchText);
+      console.log(it.body + test);
+      console.log(this.searchText);
+      return test ;
+    });
+  }
+  
+    setLightbulb() {
+    if (this.themeService.isDarkTheme()) {
+      this.faLightbulb = faRegularLightbulb;
+    } else {
+      this.faLightbulb = faSolidLightbulb;
+    }
+  }
 
-  toggleTheme() {
+  toggleTheme() { 
     if (this.themeService.isDarkTheme()) {
       this.themeService.setLightTheme();
     } else {
       this.themeService.setDarkTheme();
     }
-// this.setLightbulb();
+
+    this.setLightbulb();
+
   }
-
-
 
   getComments() {
     this.commentService.getComments().subscribe(
@@ -151,24 +170,6 @@ i:number=0;
     )
   }
 
-  postLogin() {
-    this.userService.postLogin(this.loggedUser).subscribe(
-   
-      resp => {
-        console.log(resp);
-        if (resp != null) {
-          this.loggedUser = resp;
-          localStorage.setItem('currentUser', JSON.stringify({ resp }));
-        }
-        else {
-          console.log("fail login")
-        };
-      },
-      error => {
-        console.log('could not find user');
-      }
-    )
-  }
   getweather(){
     this.userService.getWeather().subscribe(
       resp => {
@@ -183,7 +184,13 @@ i:number=0;
       error => console.log('something unexpected happened')
     );
 
+
   }
+  logout() {
+    localStorage.removeItem('currentUser');
+    console.log(localStorage.length);
+    this.router.navigate(['/login']);
+
 
    
     getUsers(){
@@ -200,6 +207,39 @@ i:number=0;
         error => console.log('something unexpected happened')
       );
     }
+
+  }
+  uploadImage() {
+    //need to grab
+    
+    console.log(this.imgUploadStr);
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.loggedUser.resp["image"] = this.imgUploadStr;
+/*    let objimage = {
+      username: y.resp['username'],
+      password: y.resp['password'],
+      firstName: y.resp['firstName'],
+      lastName: y.resp['lastName'],
+      image: this.imgUploadStr,
+      userId: y.resp['userId']
+    }
+*/
+    console.log("crated obk");
+    console.log(this.loggedUser.resp);
+    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+      resp => {
+        console.log(resp);
+        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        console.log(localStorage);
+        location.reload();
+        this.router.navigate(['/homepage']);
+      },
+      error => {
+        console.log('failed at registering');
+      }
+      )
+  }
+
 
 
     getPosts(){
@@ -243,6 +283,7 @@ i:number=0;
     });
   }
 }
+
 //   getMessages (){
 //   this.messageService.getMessages().subscribe(
 //     resp => {
@@ -275,4 +316,5 @@ i:number=0;
 //     )
 //   }
  
+
 

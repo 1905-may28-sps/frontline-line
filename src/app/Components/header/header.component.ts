@@ -36,13 +36,13 @@ export class HeaderComponent implements OnInit {
         console.log(this.loggedUser);
         if (resp != null) {
           this.loggedUser = resp;
-          //made changes here to deal with the resp issue(7/27)
-          localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
-          console.log(localStorage);
+
+          localStorage.setItem('currentUser', JSON.stringify({ resp }));
           console.log("logged in checker");
           console.log(localStorage.length);
           var x = JSON.parse(localStorage.getItem('currentUser'));
-          //console.log(x.resp['image']);
+          console.log(x.resp['image']);
+
           this.router.navigate(['/homepage']);
         }
         else {
@@ -53,6 +53,12 @@ export class HeaderComponent implements OnInit {
       error => {
         console.log('could not find user');
         console.log(this.loggedUser);
+
+      }
+    )
+  }
+  
+
       }
     )
   }
@@ -119,8 +125,39 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  displayLogInOut() {
+    if (localStorage.length == 0) {
+      //show login / signup
+
+      // hide logout
+
+    }
+    else {
+      //hide login signup
+      //show logout
+    }
+  }
+
+
+  getPosts() {
+    this.postService.getPosts().subscribe(
+      resp => {
+        if (resp != null) {
+          this.posts = resp;
+          console.log(this.posts);
+
+        }
+        else {
+          console.log('Error loading posts, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+  }
 
 
 
 
-  } 
+
+  }
+

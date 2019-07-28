@@ -3,7 +3,7 @@
 }
 .w3-container{
 
-    background-color:#5dc083,0.5;
+    background-color:#5dc083;
 }
 
 nav {
@@ -22,8 +22,16 @@ nav {
     margin-right: auto;
   }
 
+
 .w3-sidebar{
     float:inline-start;
     padding: 15px;
+}
+
+
+.userimgsize {
+  display: block;
+  max-width: 50%;
+  height: auto;
 }
 

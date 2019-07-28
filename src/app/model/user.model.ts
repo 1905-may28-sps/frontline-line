@@ -12,4 +12,6 @@ export class User{
     themeId: Theme;
     bannedId: Banned;
     image: string;
+
 }
+

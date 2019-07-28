@@ -9,8 +9,9 @@ import { HeaderComponent } from './Components/header/header.component';
 //import { FooterComponent } from './Components/footer/footer.component';
 import { HomeComponent } from './Components/home/home.component';
 
-import { AppRoutingModule } from './app-routing.module';
-//import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 import { ThemeModule } from "./theme/theme.module";
 import { UserService } from './service/user.service';
 import { Post } from './model/post';
@@ -18,9 +19,11 @@ import { PostService } from './service/post.service';
 
 
 
+<<<<<<< HEAD
 @NgModule({
   declarations: [
     AppComponent,
+routingComponents,
     HeaderComponent,
     //FooterComponent,
     HomeComponent,
@@ -30,7 +33,9 @@ import { PostService } from './service/post.service';
     BrowserModule,
 
     AppRoutingModule,
-   // AngularFontAwesomeModule,
+
+    AngularFontAwesomeModule,
+
     ThemeModule,
 
     FormsModule,

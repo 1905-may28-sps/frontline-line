@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Comment } from '../model/comment';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
+
 
   constructor(private http:HttpClient) { }
   url='http://localhost:8081/Project2/comment';
@@ -23,3 +25,4 @@ export class CommentService {
     return this.http.post<Comment>(`${this.url}`,comment,this.reqOptions);
   }
 }
+
