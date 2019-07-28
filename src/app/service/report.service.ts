@@ -15,14 +15,10 @@ export class ReportService {
 
   };
 
-  // public getPosts(){
-  //   return this.http.get<Post[]>(this.url);
-  // }
+ 
 
   public addReport(report: Report){
-    report.reportType.reportType=1;
-    report.reportType.reportTypeId=1;
-
+    
     // this.reqOptions.headers.append('test', 'test'); //if you have more headers
  
      return this.http.post<Report>(`${this.url}`, report);
