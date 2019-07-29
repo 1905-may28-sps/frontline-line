@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿<input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
+=======
+
+<input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
+>>>>>>> origin/v3
 <button (click)="logout()">Logout</button>
 
 <nav class="navbar navbar-expand-lg navbar-theme">
@@ -118,7 +123,11 @@
 												<img src="../../../assets/images/smile.png" width="30"
 													height="30" value=3>
 											</button>
+<<<<<<< HEAD
 											<button (click)="addReport(post)">
+=======
+											<button>
+>>>>>>> origin/v3
 												<img src="../../../assets/images/exclamation.png" width="30"
 													height="30" value=1>
 											</button>
@@ -129,11 +138,20 @@
 									</div>
 									<div class="showCommentl" *ngFor="let postcomment of comments">
 										<div *ngIf="post.postId==postcomment.postId.postId">
+<<<<<<< HEAD
 											<li class="list-group-item"><b>@{{postcomment.userId.firstName}}</b> {{postcomment.body}}</li>
 										</div>
 									</div>
 							
        
+=======
+											<li class="list-group-item"><b>@{{postcomment.userId.firstName}}</b>
+												{{postcomment.body}}</li>
+										</div>
+									</div>
+							
+						
+>>>>>>> origin/v3
 					
 				</div>
 		</div>
@@ -143,11 +161,20 @@
 				<h4 class="w3-bar-item">Weather in {{theWeather.name}}</h4>
 				<ul class="list-group w3-light-grey">
 					<!-- <li  class="list-group-item w3-light-grey">{{theWeather.weather.icon}}</li> -->
+<<<<<<< HEAD
           <li class="list-group-item w3-light-grey">{{theWeather.main.temp}} °C </li>
           <li class="list-group-item w3-light-grey">{{theWeather.weather[0].main}}, {{theWeather.weather[0].description}}</li>
+=======
+					<li class="list-group-item w3-light-grey">{{theWeather.main.temp}} °C "l</li> °C "l
+					<li class="list-group-item w3-light-grey">{{theWeather.weather[0].main}}, {{theWeather.weather[0].description}}</li>
+>>>>>>> origin/v3
 					<li class="list-group-item w3-light-grey"></li>
 				</ul>
 			</div>
 	
    
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> origin/v3

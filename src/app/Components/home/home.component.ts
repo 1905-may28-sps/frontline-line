@@ -1,16 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 
 // import {
 //   faLightbulb as faSolidLightbulb,
 //   IconDefinition
 // } from "@fortawesome/free-solid-svg-icons";
 // import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
-import { ThemeService } from "src/app/theme/theme.service";
+=======
+//<import {
+  //faLightbulb as faSolidLightbulb,
+  //IconDefinition
+//}> from "@fortawesome/free-solid-svg-icons";
 
+//import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
+>>>>>>> origin/v3
+import { ThemeService } from "src/app/theme/theme.service";
 import { UserService } from '../../service/user.service';
 import { User } from 'src/app/model/user.model';
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
+import {MessageService} from 'src/app/service/message.service';
+//import {Message} from 'src/app/model/message.model';
+import { CommentService } from 'src/app/service/comment.service';
+import { Comment } from 'src/app/model/comment';
+import { Router } from '@angular/router';
 
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
@@ -48,6 +61,7 @@ export class HomeComponent implements OnInit {
 i:number=0;
 
   post: Post=new Post();
+<<<<<<< HEAD
 
   searchText: string = '';
 
@@ -58,19 +72,43 @@ i:number=0;
 
   constructor( private themeService: ThemeService, private userService: UserService, private postService: PostService, private commentService: CommentService, private reportService: ReportService) {
 
+=======
+  comments: Comment[] = [];
+  newpost: Post = new Post();
+  newcomment: Comment = new Comment();
+  showComment: boolean = false;
+  searchText: string = '';
+  imgUploadStr = '';
+  loggedUser: User = new User();
+  theWeather: [];
+  x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
+
+  imageSrc = ''
+  //faLightbulb: IconDefinition;
+
+
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService, private router: Router) { 
+>>>>>>> origin/v3
     console.log('in user service constructor')
   }
 
   ngOnInit() {
+<<<<<<< HEAD
     // this.setLightbulb();
     this.getUsers();
     this.getPosts();
 
+=======
+    //this.setLightbulb();
+    this.getUsers();
+    this.getPosts();
+>>>>>>> origin/v3
     this.getComments();
     this.getweather();
   }
 
   toggleComment(post: Post) {
+<<<<<<< HEAD
 
     this.showComment1 = !this.showComment1;
     console.log(this.showComment1+""+ (this.i)++);
@@ -231,6 +269,62 @@ i:number=0;
       )
     }
   
+=======
+
+    this.showComment = !this.showComment;
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe(
+      resp => {
+        if(resp != null){
+          this.users = resp;
+          console.log(this.users);
+        }
+        else{
+          console.log('Error loading users, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+  }
+
+
+  getPosts(){
+    this.postService.getPosts().subscribe(
+      resp => {
+        if(resp != null){
+          this.posts = resp;
+          console.log(this.posts);
+        }
+        else{
+          console.log('Error loading posts, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+  }
+
+  posting() {
+    console.log(this.newpost);
+    // console.log(HeaderComponent.arguments.loggedUser);
+    // this.post.user=HeaderComponent.arguments.loggedUser;
+    // this.newpost.user=this.loggedUser;
+    this.newpost.user=this.x;
+
+    this.postService.addPost(this.newpost).subscribe(
+      resp => {
+        console.log(resp);
+        this.posts.push(resp);
+        this.newpost = new Post();
+      },
+      
+      error => {
+        console.log('failed at post');
+      }
+    )
+  }
+>>>>>>> origin/v3
 
   filterPosts(){
     this.posts = this.posts.filter(it => {
@@ -242,6 +336,7 @@ i:number=0;
       return test ;
     });
   }
+<<<<<<< HEAD
 }
 //   getMessages (){
 //   this.messageService.getMessages().subscribe(
@@ -276,3 +371,111 @@ i:number=0;
 //   }
  
 
+=======
+
+  // setLightbulb() {
+  //   if (this.themeService.isDarkTheme()) {
+  //     this.faLightbulb = faRegularLightbulb;
+  //   } else {
+  //     this.faLightbulb = faSolidLightbulb;
+  //   }
+  // }
+
+  toggleTheme() { 
+    if (this.themeService.isDarkTheme()) {
+      this.themeService.setLightTheme();
+    } else {
+      this.themeService.setDarkTheme();
+    }
+
+    //this.setLightbulb();
+
+  }
+  getComments() {
+    this.commentService.getComments().subscribe(
+      resp => {
+        if (resp != null) {
+          this.comments = resp;
+          console.log(this.comments);
+        } else {
+          console.log('Error loading posts, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+  }
+  addComment(post: Post) {
+    console.log(this.newcomment);
+    this.newcomment.postId = post;
+    console.log(this.x);
+    //this.newcomment.userId=this.loggedUser;
+    this.newcomment.userId=this.x;
+    this.commentService.addComment(this.newcomment).subscribe(
+      resp => {
+        console.log(resp);
+        this.comments.push(resp);
+        this.newcomment = new Comment();
+      }, error => {
+        console.log('failed at comment');
+      }
+
+    )
+  }
+
+  getweather(){
+    this.userService.getWeather().subscribe(
+      resp => {
+        if (resp != null) {
+          this.theWeather = resp;
+          console.log(this.theWeather);
+        }
+        else {
+          console.log('Error loading users, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+
+
+  }
+  logout() {
+    localStorage.removeItem('currentUser');
+    console.log(localStorage.length);
+    this.router.navigate(['/login']);
+
+  }
+  uploadImage() {
+    //need to grab
+    
+    console.log(this.imgUploadStr);
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.loggedUser.resp["image"] = this.imgUploadStr;
+/*    let objimage = {
+      username: y.resp['username'],
+      password: y.resp['password'],
+      firstName: y.resp['firstName'],
+      lastName: y.resp['lastName'],
+      image: this.imgUploadStr,
+      userId: y.resp['userId']
+    }
+*/
+    console.log("crated obk");
+    console.log(this.loggedUser.resp);
+    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+      resp => {
+        console.log(resp);
+        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        console.log(localStorage);
+        location.reload();
+        this.router.navigate(['/homepage']);
+      },
+      error => {
+        console.log('failed at registering');
+      }
+      )
+  }
+
+
+
+}
+>>>>>>> origin/v3

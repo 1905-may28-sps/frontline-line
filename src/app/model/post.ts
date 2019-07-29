@@ -7,7 +7,10 @@ export class Post {
     image:string;
     timestamp:string;
     point: number;
+<<<<<<< HEAD
 
    
     
+=======
+>>>>>>> origin/v3
 }

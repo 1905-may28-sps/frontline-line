@@ -7,4 +7,8 @@ export class Report {
     reportType: ReportType;
     post: Post;
     reporter: User;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/v3

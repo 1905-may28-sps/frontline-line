@@ -4,6 +4,12 @@ import { UserService } from 'src/app/service/user.service';
 import { Router } from "@angular/router"
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
+<<<<<<< HEAD
+=======
+
+//import { Router } from '@angular/router';
+
+>>>>>>> origin/v3
 
 
 @Component({
@@ -21,21 +27,33 @@ export class HeaderComponent implements OnInit {
 
 
 
+<<<<<<< HEAD
 
   constructor(private userService: UserService, private router: Router,private postService: PostService) { }
+=======
+  constructor(private userService: UserService, private router: Router,private postService: PostService) { }
+
+  ngOnInit() {
+    this.displayLogInOut();
+    this.getPosts();
+>>>>>>> origin/v3
 
   ngOnInit() {
     this.displayLogInOut();
     this.getPosts();
     
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/v3
   postLogin() {
     this.userService.postLogin(this.loggedUser).subscribe(
       resp => {
         console.log(this.loggedUser);
         if (resp != null) {
           this.loggedUser = resp;
+<<<<<<< HEAD
           //made changes here to deal with the resp issue(7/27)
           localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
           console.log(localStorage);
@@ -43,6 +61,13 @@ export class HeaderComponent implements OnInit {
           console.log(localStorage.length);
           var x = JSON.parse(localStorage.getItem('currentUser'));
           //console.log(x.resp['image']);
+=======
+          localStorage.setItem('currentUser', JSON.stringify({ resp }));
+          console.log("logged in checker");
+          console.log(localStorage.length);
+          var x = JSON.parse(localStorage.getItem('currentUser'));
+          console.log(x.resp['image']);
+>>>>>>> origin/v3
           this.router.navigate(['/homepage']);
         }
         else {
@@ -92,6 +117,8 @@ export class HeaderComponent implements OnInit {
   displayLogInOut() {
     if (localStorage.length == 0) {
       //show login / signup
+<<<<<<< HEAD
+=======
 
       // hide logout
 
@@ -100,6 +127,33 @@ export class HeaderComponent implements OnInit {
       //hide login signup
       //show logout
     }
+  }
+>>>>>>> origin/v3
+
+      // hide logout
+
+<<<<<<< HEAD
+    }
+    else {
+      //hide login signup
+      //show logout
+    }
+=======
+  getPosts() {
+    this.postService.getPosts().subscribe(
+      resp => {
+        if (resp != null) {
+          this.posts = resp;
+          console.log(this.posts);
+
+        }
+        else {
+          console.log('Error loading posts, null value sent back')
+        }
+      },
+      error => console.log('something unexpected happened')
+    );
+>>>>>>> origin/v3
   }
 
 
@@ -117,6 +171,10 @@ export class HeaderComponent implements OnInit {
       },
       error => console.log('something unexpected happened')
     );
+  }
+
+
+
   }
 
 

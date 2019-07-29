@@ -8,8 +8,18 @@ export class User{
     password: string;
     firstName: string;
     lastName: string;
+<<<<<<< HEAD
     roleId: Role;
     themeId: Theme;
     bannedId: Banned;
     image: string;
 }
+=======
+    roleId:Role;
+    image: string;
+    bannedId: Banned;
+    themeId: Theme;
+  resp: any;
+}
+ 
+>>>>>>> origin/v3
