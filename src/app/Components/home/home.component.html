@@ -1,12 +1,14 @@
 
-
+<div class="mat-typography" [ngStyle]="{'font-size': size + 'px'}">
 
 <nav class="navbar navbar-expand-lg navbar-theme">
 	<ul class="navbar-header d-flex col">
-		<img src="../../../assets/images/thefrontline.png" width="130" height="130">
+		<img src="../../../assets/images/thefrontline.png" width="150" height="130" class="logo">
 	</ul>
 
 	<ul class="nav navbar-nav navbar-right ml-auto">
+			<li><button (click)="size = size + 1" class="btn btn-outline-success my-2 my-sm-0">+</button></li>
+			<li><button (click)="size = size - 1" class="btn btn-outline-success my-2 my-sm-0" >-</button></li>
 		<li><input type="submit" class="btn btn-outline-success my-2 my-sm-0" value="Logout" (click)="logout()"></li>
 		<!--<button (click)="logout()">Logout</button>-->
 		<li class="nav-item dropdown">
@@ -33,7 +35,7 @@
 			</div>
 			</li>
 		-->
-     <li> <input [(ngModel)]="searchText" placeholder="search text goes here" (change)="filterPosts()" class="form-control mr-sm-2"
+     <li> <input [(ngModel)]="searchText" placeholder="search text goes here" (keydown)="filterPosts()" (keydown.backspace)="refresh()" class="form-control mr-sm-2"
 	  aria-label="Search"></li>
 	  
 	</ul>
@@ -47,13 +49,13 @@
 		<!-- Left Nav-->
 		<div class="col-3">
 			<div  class="sidenav" style="width: 25%; left: 0%">
-				<h3 class="w3-bar-item" >User Profile</h3>
+				<h2 class="w3-bar-item" >User Profile</h2>
 				<br>
 				<br> 
 				<br>
 				<br>
 				<br>
-				<img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZjVLtJDgMTOExfMHsTZuT4G5cAmaRT0N0vnoVbblrTTKkwSOb"  style="display: block; margin-right: auto; margin-left: auto" class="rounded-circle userimgsize " alt="Image Not Available"> 
+				<img src= "{{x['image']}}"  style="display: block; margin-right: auto; margin-left: auto" class="rounded-circle userimgsize " alt="Image Not Available"> 
 				<br>
 				
 				<input type="text" class="form-control" placeholder="Enter URL of Image" id="image" [(ngModel)]="imgUploadStr" required="required">
@@ -79,7 +81,7 @@
 
 					<div class="input-group mb-1">
 						<textarea id="newPost" type="text" class="form-control"
-							placeholder="Add a post" [(ngModel)]="post.body"></textarea>
+							placeholder="Add a post" [(ngModel)]="newpost.body"></textarea>
 						<div class="input-group-append">
 							<button routerLink="/addPost" class="btn btn-outline-secondary"
 								(click)="posting()" type="button" id="addPostButton" class="btn btn-outline-success my-2 my-sm-0"> Post</button>
@@ -91,7 +93,7 @@
 
 					<ul class="list-group">
 
-						<li class="card list-group-item" *ngFor="let post of posts"
+						<li class="card list-group-item" *ngFor="let post of filteredPosts"
 							(click)="toggleComment(post); clicked=true">
 							<div>
 
@@ -104,28 +106,28 @@
 								</div>
 								<div class="card-footer text-muted">
 									<div class="input-group mb-1">
-
-										<textarea type="text" class = "commentSection" placeholder="Comment" [(ngModel)]="newcomment.body"></textarea>
+										<br>
+										<textarea type="text" placeholder="Comment" [(ngModel)]="newcomment.body"></textarea>
 										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" type="button" id="addComButton" class="btn btn-outline-success my-2 my-sm-0">Say it!</button>
+											<button class="btn btn-outline-secondary" type="button" id="addComButton" (click) = "addComment(post)" class="btn btn-outline-success my-2 my-sm-0">Say it!</button>
 											
 											<button class="btn btn-outline-success my-2 my-sm-0">
-												<img src="../../../assets/images/motivation.png" width="30"
+												<img src="../../../assets/images/motivation.png" width="25"
 													height="30" value=1>
 											</button>
 											<button class="btn btn-outline-success my-2 my-sm-0">
-												<img src="../../../assets/images/hands-and-gestures.png" width="30"
+												<img src="../../../assets/images/hands-and-gestures.png" width="25"
 													height="30" value=2>
 											</button>
 											<button class="btn btn-outline-success my-2 my-sm-0">
-												<img src="../../../assets/images/fan.png" width="30"
+												<img src="../../../assets/images/fan.png" width="25"
 													height="30" value=3>
 											</button>
-											
-											<!--	<button>
-											<img src="../../../assets/images/exclamation.png" width="30"
-													height="30" value=1>
-											</button> -->
+			
+											<button class="btn btn-outline-success my-2 my-sm-0" (click)="addReport(post)">
+											<img src="../../../assets/images/alert.png" width="25"
+													height="30" >
+											</button> 
 											
 
 										</div>
@@ -134,10 +136,10 @@
 									<div class="commentSection">
 									<div class="showCommentl" *ngFor="let postcomment of comments">
 										<div *ngIf="post.postId==postcomment.postId.postId" >
-											<ul>
-											<li class="list-group-item" ><b>@{{postcomment.userId.firstName}}</b>
-												{{postcomment.body}}</li>
-											</ul>
+											<div class="commentSection">
+											<ul class="list-group-item" class= " border border-info" style = "background-color: white; margin: 5px" ><b>@{{postcomment.userId.firstName}}</b>
+												{{postcomment.body}}</ul>
+											</div>
 										</div>
 									</div>
 						  			</div>
@@ -201,4 +203,5 @@
 
 	</div>
    
+</div>
 </div>

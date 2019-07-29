@@ -16,6 +16,9 @@ import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
 import { Router } from '@angular/router';
 
+import { Report } from 'src/app/model/report';
+import { ReportService } from 'src/app/service/report.service';
+import { ReportType } from 'src/app/model/report-type';
 
 @Component({
   selector: 'app-home',
@@ -25,21 +28,28 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   users: User[] = [];
   posts: Post[]=[];
+  filteredPosts: Post[] = [];
   post: Post=new Post();
   comments: Comment[] = [];
   newpost: Post = new Post();
   newcomment: Comment = new Comment();
   showComment: boolean = false;
+  showComment1: boolean = false;
+  newReport:Report = new Report();
+
   searchText: string = '';
+  
   imgUploadStr:string = '';
   loggedUser: User = new User();
   theWeather: [];
-  x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
+  x:User = JSON.parse(localStorage.getItem('currentUser'));
+  i: number = 0;
   imageSrc: string = '';
+  size = 16;
   //faLightbulb: IconDefinition;
 
 
-  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService, private router: Router) { 
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService,  private reportService: ReportService, private router: Router) { 
     console.log('in user service constructor')
   }
 
@@ -53,9 +63,9 @@ export class HomeComponent implements OnInit {
 
   toggleComment(post: Post) {
 
-    this.showComment = !this.showComment;
+    this.showComment1 = !this.showComment1;
+    console.log(this.showComment1+""+ (this.i)++);
   }
-
   getUsers(){
     this.userService.getUsers().subscribe(
       resp => {
@@ -63,7 +73,8 @@ export class HomeComponent implements OnInit {
           this.users = resp;
           console.log(this.users);
         }
-        else{
+        else {
+          alert("Try again");
           console.log('Error loading users, null value sent back')
         }
       },
@@ -77,6 +88,7 @@ export class HomeComponent implements OnInit {
       resp => {
         if(resp != null){
           this.posts = resp;
+          this.filteredPosts = resp;
           console.log(this.posts);
         }
         else{
@@ -92,6 +104,8 @@ export class HomeComponent implements OnInit {
     // console.log(HeaderComponent.arguments.loggedUser);
     // this.post.user=HeaderComponent.arguments.loggedUser;
     // this.newpost.user=this.loggedUser;
+    if (this.newpost.body != ''){
+
     this.newpost.user=this.x;
 
     this.postService.addPost(this.newpost).subscribe(
@@ -103,18 +117,30 @@ export class HomeComponent implements OnInit {
       
       error => {
         console.log('failed at post');
-      }
-    )
+              }
+              
+    )} else {
+      alert("Try again")
+  
+    }
+  }
+
+  refresh(){
+    if(this.searchText == '')  this.filteredPosts = this.posts;
   }
 
   filterPosts(){
-    this.posts = this.posts.filter(it => {
+    this.filteredPosts = this.posts.filter(it => {
       console.log('In filter post');
+      
       this.searchText = this.searchText.toLowerCase();
       let test =  it.body.toLowerCase().includes(this.searchText);
+      
       console.log(it.body + test);
       console.log(this.searchText);
+
       return test ;
+     
     });
   }
 
@@ -166,6 +192,29 @@ export class HomeComponent implements OnInit {
 
     )
   }
+  addReport(post: Post) {
+    console.log(this.newReport);
+    this.newReport.post= post;
+    //this.newcomment.userId=this.loggedUser;
+    this.newReport.reporter=this.x;
+   
+  
+
+    // this.newReport.reportType={reportTypeId:1,reportType:1};
+    // this.newReport.reportType.reportType=1;
+    
+
+    this.reportService.addReport(this.newReport).subscribe(
+      resp => {
+        console.log(resp);
+        location.reload();
+        
+      }, error => {
+        console.log('failed at report');
+      }
+
+    )
+  }
 
   getweather(){
     this.userService.getWeather().subscribe(
@@ -191,11 +240,12 @@ export class HomeComponent implements OnInit {
   }
   uploadImage() {
     //need to grab
-    //console.log(this.imgUploadStr);
+    console.log("image");
+    console.log(this.imgUploadStr);
     let luser = JSON.parse(localStorage.getItem('currentUser'));
     //console.log(luser);
     luser.image = this.imgUploadStr;
-    //console.log(luser);
+    console.log(luser);
     //removed resp
     this.userService.uploadImage(luser).subscribe(
       resp => {
@@ -204,7 +254,7 @@ export class HomeComponent implements OnInit {
         console.log("check lclsttrge after upload");
         console.log(localStorage);
         location.reload();
-        this.router.navigate(['/homepage']);
+        //this.router.navigate(['/homepage']);
       },
       error => {
         console.log('failed at registering');

@@ -1,9 +1,16 @@
 
+*{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+border-radius: 10px;
+}
+.logo{
+  padding-top: 13px;
+}
 .navbar-theme{
-    background-color:#5dc083,0.5;   
+    background-color:#5dc083;   
 }
 .w3-container{
-    background-color:#5dc083,0.5;
+    background-color:#5dc083;
 }
 
 .sidenav {
@@ -12,10 +19,11 @@
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 27%; /* Stay at the top */
-  background-color: lightgrey; /* Black */
+  background-color: rgb(241, 233, 233); /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
   border-radius: 10px;
+  
   
 }
 .imageButton{
@@ -35,7 +43,7 @@
 
 
 }
-.showCommentl{
+.Comment{
   border-left-color:#b0f5ca(0,0,0,0.5);
   border-right-color:#b0f5ca(0,0,0,0.5);
   border-top-color:#b0f5ca(0,0,0,0.5);
@@ -59,8 +67,14 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border-radius: 10px;
 }
-
-
+.card-text{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+  
+}
+.commentSection{
+  border-radius: 10px;
+}
 nav {
     height: 10rem;
     display: flex;
@@ -86,26 +100,32 @@ nav {
     height: auto;
   }
  .w3-bar-item{
-
+    top: 25%;
     color: #FFF;
+    text-transform:uppercase;
+    font-size: 20px;
+    margin-top: 10px;
     overflow: hidden;
     z-index: 10;
     position: fixed;
-    padding-left: 1.25rem;
-    padding-top: 1rem;
+   
+    padding-top: 2.5%;
+    text-align: center;
     height: 90px;
     width: 25%;
     text-align: center;
-    background-color:#5dc083;
+    background-color: rgb(177, 61, 177);
     border-radius: 10px;
     box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+
+    
 }
 
   .weather{
-
+    top: 27%;
       color: #FFF;
       overflow: hidden;
-      z-index: 10;
+      z-index: 0;
       position: fixed;
       padding-left: 1.25rem;
       padding-top: 1rem;
@@ -141,7 +161,7 @@ nav {
       right: -50px;
       top: -70px;
       border-radius: 50%;
-      background-color: #87c29d;
+      background-color:rgb(69, 202, 246);
       
       animation: enlarge;
       animation-duration: 7s;
@@ -156,7 +176,7 @@ nav {
       right: -50px;
       top: -100px;
       border-radius: 50%;
-      background-color: #7c9b88;
+      background-color: rgb(177, 61, 177);
       
       animation: enlarge;
       animation-duration: 10s;
