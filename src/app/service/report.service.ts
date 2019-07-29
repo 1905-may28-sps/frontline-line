@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ReportService {
 
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:8081/Project2/report';
+  url = 'http://localhost:8080/Project2/report';
   reqOptions = {
 
     headers: new HttpHeaders({'Content-Type' : 'application/json'}) 
@@ -26,8 +26,8 @@ export class ReportService {
   // }
 
   public addReport(report: Report){
-    report.reportType.reportType=1;
-    report.reportType.reportTypeId=1;
+    // report.reportType.reportType=1;
+    // report.reportType.reportTypeId=1;
 
 >>>>>>> origin/v3
     // this.reqOptions.headers.append('test', 'test'); //if you have more headers

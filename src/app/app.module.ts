@@ -14,8 +14,12 @@ import { AppRoutingModule } from './app-routing.module';
 //import { AngularFontAwesomeModule } from 'angular-font-awesome';
 =======
 import { AppRoutingModule, routingComponents } from './app-routing.module';
+<<<<<<< HEAD
 //mport { AngularFontAwesomeModule } from 'angular-font-awesome';
 >>>>>>> origin/v3
+=======
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+>>>>>>> v4
 import { ThemeModule } from "./theme/theme.module";
 import { UserService } from './service/user.service';
 import { Post } from './model/post';

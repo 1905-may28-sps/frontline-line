@@ -1,12 +1,24 @@
+
+*{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+border-radius: 10px;
+}
+.logo{
+  padding-top: 13px;
+}
 .navbar-theme{
-    background-color:#5dc083,0.5;   
+    background-color:#5dc083;   
 }
 .w3-container{
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
 >>>>>>> origin/v3
     background-color:#5dc083,0.5;
+=======
+    background-color:#5dc083;
+>>>>>>> v4
 }
 
 .sidenav {
@@ -14,14 +26,65 @@
   width: 25%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
-  top: 38%; /* Stay at the top */
-  background-color: lightgrey; /* Black */
+  top: 27%; /* Stay at the top */
+  background-color: rgb(241, 233, 233); /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
+  border-radius: 10px;
+  
+  
 }
+.imageButton{
+  padding-left: 1rem;
+  padding-right: 1rem;
 
+}
+.Content{
+
+  text-align: center;
+  color: #fff;
+  text-transform:uppercase;
+  font-size: 14px;
+  margin-top: 20px;
+  background-color: rgb(69, 202, 246);
+  border-radius: 10px;
+
+
+}
+.Comment{
+  border-left-color:#b0f5ca(0,0,0,0.5);
+  border-right-color:#b0f5ca(0,0,0,0.5);
+  border-top-color:#b0f5ca(0,0,0,0.5);
+  border-bottom-color:#b0f5ca;
+  border-radius: 10px;
+}
+.card-header {
+     
+  background-color: rgb(69, 202, 246);
+
+  /*rgb(55, 138, 211);*/
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+}
+.card{
+  border-left-color: rgb(69, 202, 246);
+  border-right-color: rgb(69, 202, 246);
+  border-top-color: rgb(69, 202, 246);
+  border-bottom-color: rgb(69, 202, 246);
+  background-color: rgb(240, 240, 240);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+}
+.card-text{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-radius: 10px;
+  
+}
+.commentSection{
+  border-radius: 10px;
+}
 nav {
-    height: 4rem;
+    height: 10rem;
     display: flex;
     align-items: center;
     padding-left: 1rem;
@@ -30,6 +93,10 @@ nav {
     color: var(--foreground-quaternary);
     font-size: 1rem;
   }
+  .navbar-nav > li{
+    margin-left:3px;
+    margin-right:3px;
+   }
   
   nav .title {
     margin-left: auto;
@@ -48,4 +115,155 @@ nav {
     max-width: 50%;
     height: auto;
   }
+<<<<<<< HEAD
 >>>>>>> origin/v3
+=======
+ .w3-bar-item{
+    top: 25%;
+    color: #FFF;
+    text-transform:uppercase;
+    font-size: 20px;
+    margin-top: 10px;
+    overflow: hidden;
+    z-index: 10;
+    position: fixed;
+   
+    padding-top: 2.5%;
+    text-align: center;
+    height: 90px;
+    width: 25%;
+    text-align: center;
+    background-color: rgb(177, 61, 177);
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+
+    
+}
+
+  .weather{
+    top: 27%;
+      color: #FFF;
+      overflow: hidden;
+      z-index: 0;
+      position: fixed;
+      padding-left: 1.25rem;
+      padding-top: 1rem;
+      height: 90px;
+      width: 25%;
+      background-color:#5dc083;
+      border-radius: 10px;
+      box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+  }
+  
+  
+  /*  BACKGROUND  */
+  
+  .Circle1{
+      z-index: 100;
+      position: absolute;
+      height: 80px;
+      width: 80px;
+      right: -20px;
+      top: -30px;
+      border-radius: 50%;
+      background-color: #5dc083;
+      animation: enlarge;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+  }
+  
+  .Circle2{
+      z-index: 80;
+      position: absolute;
+      height: 150px;
+      width: 150px;
+      right: -50px;
+      top: -70px;
+      border-radius: 50%;
+      background-color:rgb(69, 202, 246);
+      
+      animation: enlarge;
+      animation-duration: 7s;
+      animation-iteration-count: infinite;
+  }
+  
+  .Circle3{
+      z-index: 50;
+      position: absolute;
+      height: 200px;
+      width: 200px;
+      right: -50px;
+      top: -100px;
+      border-radius: 50%;
+      background-color: rgb(177, 61, 177);
+      
+      animation: enlarge;
+      animation-duration: 10s;
+      animation-iteration-count: infinite;
+  }
+  
+  
+  
+  /*  CONTENT  */
+  
+
+  .Condition{
+      z-index: 1000;
+      position: absolute;
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      font-size: 20px;
+      left: 20px;  
+      top: 10px;
+  }
+  
+  .Temp{
+      /* z-index: 1000;
+      position: absolute;*/
+      font-family: "Roboto", sans-serif;
+      font-size: 35px;
+      font-weight: 400;
+      left: 20px;
+      bottom: 5px;
+  }
+  
+  #F{
+      z-index: 1000;
+      font-family: "Roboto",sans-serif;
+      font-weight: 100;
+      font-size: 30px;
+  }
+  
+  
+  .Time{
+      z-index: 1000;
+      position: absolute;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 18px;
+      font-weight: 200;
+      right: 20px;
+      top: 10px;
+  }
+  
+  .locationIcon{
+      z-index: 1000;
+      font-size: 10px !important;
+  }
+  
+  .Location{
+      z-index: 1000;
+      position: absolute;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 200;
+      right: 20px;
+      bottom: 15px;
+  }
+  
+  @keyframes enlarge{
+      50%{
+          transform: scale(1.2);
+      }
+  }
+  
+>>>>>>> v4

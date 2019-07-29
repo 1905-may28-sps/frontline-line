@@ -7,9 +7,12 @@ import { Post } from 'src/app/model/post';
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 //import { Router } from '@angular/router';
 
 >>>>>>> origin/v3
+=======
+>>>>>>> v4
 
 
 @Component({
@@ -34,7 +37,6 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService, private router: Router,private postService: PostService) { }
 
   ngOnInit() {
-    this.displayLogInOut();
     this.getPosts();
 >>>>>>> origin/v3
 
@@ -53,6 +55,7 @@ export class HeaderComponent implements OnInit {
         console.log(this.loggedUser);
         if (resp != null) {
           this.loggedUser = resp;
+<<<<<<< HEAD
 <<<<<<< HEAD
           //made changes here to deal with the resp issue(7/27)
           localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
@@ -86,6 +89,35 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('currentUser');
     console.log(localStorage.length);
   }
+=======
+           //made changes here to deal with the resp issue(7/27)
+           localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
+           console.log(localStorage);
+           console.log("logged in checker");
+           console.log(localStorage.length);
+           var x = JSON.parse(localStorage.getItem('currentUser'));
+           //console.log(x.resp['image']);
+           this.router.navigate(['/homepage']);
+         }
+         else {
+           console.log("fail login")
+           console.log(this.loggedUser);
+           alert("Contact ");
+         };
+       },
+       error => {
+         console.log('could not find user');
+         console.log(this.loggedUser);
+         alert("Incorrect password");
+       }
+     )
+   }
+   //deletes the local storage, which logs out user
+   logout() {
+     localStorage.removeItem('currentUser');
+     console.log(localStorage.length);
+   }
+>>>>>>> v4
 
   registerUser() {
     console.log("registering");
@@ -110,8 +142,10 @@ export class HeaderComponent implements OnInit {
       error => {
         console.log(this.regUser);
         console.log('failed at registering');
+        alert("Try Again");
       }
     )
+<<<<<<< HEAD
   }
 
   displayLogInOut() {
@@ -129,6 +163,9 @@ export class HeaderComponent implements OnInit {
     }
   }
 >>>>>>> origin/v3
+=======
+    }
+>>>>>>> v4
 
       // hide logout
 

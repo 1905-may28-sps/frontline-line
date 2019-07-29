@@ -25,6 +25,7 @@ import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
 import { Router } from '@angular/router';
 
+<<<<<<< HEAD
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/model/comment';
 import { Report } from 'src/app/model/report';
@@ -37,6 +38,11 @@ import { ReportType } from 'src/app/model/report-type';
 // import {Message} from 'src/app/model/message.model';
 
 
+=======
+import { Report } from 'src/app/model/report';
+import { ReportService } from 'src/app/service/report.service';
+import { ReportType } from 'src/app/model/report-type';
+>>>>>>> v4
 
 @Component({
   selector: 'app-home',
@@ -45,6 +51,7 @@ import { ReportType } from 'src/app/model/report-type';
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
+<<<<<<< HEAD
 
   posts: Post[] = [];
   comments: Comment[] = [];
@@ -60,6 +67,10 @@ export class HomeComponent implements OnInit {
   x:User = JSON.parse(localStorage.getItem('currentUser'));
 i:number=0;
 
+=======
+  posts: Post[]=[];
+  filteredPosts: Post[] = [];
+>>>>>>> v4
   post: Post=new Post();
 <<<<<<< HEAD
 
@@ -77,18 +88,27 @@ i:number=0;
   newpost: Post = new Post();
   newcomment: Comment = new Comment();
   showComment: boolean = false;
+  showComment1: boolean = false;
+  newReport:Report = new Report();
+
   searchText: string = '';
-  imgUploadStr = '';
+  
+  imgUploadStr:string = '';
   loggedUser: User = new User();
   theWeather: [];
-  x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
-
-  imageSrc = ''
+  x:User = JSON.parse(localStorage.getItem('currentUser'));
+  i: number = 0;
+  imageSrc: string = '';
+  size = 16;
   //faLightbulb: IconDefinition;
 
 
+<<<<<<< HEAD
   constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService, private router: Router) { 
 >>>>>>> origin/v3
+=======
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService,  private reportService: ReportService, private router: Router) { 
+>>>>>>> v4
     console.log('in user service constructor')
   }
 
@@ -271,9 +291,9 @@ i:number=0;
   
 =======
 
-    this.showComment = !this.showComment;
+    this.showComment1 = !this.showComment1;
+    console.log(this.showComment1+""+ (this.i)++);
   }
-
   getUsers(){
     this.userService.getUsers().subscribe(
       resp => {
@@ -281,7 +301,8 @@ i:number=0;
           this.users = resp;
           console.log(this.users);
         }
-        else{
+        else {
+          alert("Try again");
           console.log('Error loading users, null value sent back')
         }
       },
@@ -295,6 +316,7 @@ i:number=0;
       resp => {
         if(resp != null){
           this.posts = resp;
+          this.filteredPosts = resp;
           console.log(this.posts);
         }
         else{
@@ -310,6 +332,8 @@ i:number=0;
     // console.log(HeaderComponent.arguments.loggedUser);
     // this.post.user=HeaderComponent.arguments.loggedUser;
     // this.newpost.user=this.loggedUser;
+    if (this.newpost.body != ''){
+
     this.newpost.user=this.x;
 
     this.postService.addPost(this.newpost).subscribe(
@@ -321,19 +345,31 @@ i:number=0;
       
       error => {
         console.log('failed at post');
-      }
-    )
+              }
+              
+    )} else {
+      alert("Try again")
+  
+    }
+  }
+
+  refresh(){
+    if(this.searchText == '')  this.filteredPosts = this.posts;
   }
 >>>>>>> origin/v3
 
   filterPosts(){
-    this.posts = this.posts.filter(it => {
+    this.filteredPosts = this.posts.filter(it => {
       console.log('In filter post');
+      
       this.searchText = this.searchText.toLowerCase();
       let test =  it.body.toLowerCase().includes(this.searchText);
+      
       console.log(it.body + test);
       console.log(this.searchText);
+
       return test ;
+     
     });
   }
 <<<<<<< HEAD
@@ -421,6 +457,29 @@ i:number=0;
 
     )
   }
+  addReport(post: Post) {
+    console.log(this.newReport);
+    this.newReport.post= post;
+    //this.newcomment.userId=this.loggedUser;
+    this.newReport.reporter=this.x;
+   
+  
+
+    // this.newReport.reportType={reportTypeId:1,reportType:1};
+    // this.newReport.reportType.reportType=1;
+    
+
+    this.reportService.addReport(this.newReport).subscribe(
+      resp => {
+        console.log(resp);
+        location.reload();
+        
+      }, error => {
+        console.log('failed at report');
+      }
+
+    )
+  }
 
   getweather(){
     this.userService.getWeather().subscribe(
@@ -446,28 +505,21 @@ i:number=0;
   }
   uploadImage() {
     //need to grab
-    
+    console.log("image");
     console.log(this.imgUploadStr);
-    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.loggedUser.resp["image"] = this.imgUploadStr;
-/*    let objimage = {
-      username: y.resp['username'],
-      password: y.resp['password'],
-      firstName: y.resp['firstName'],
-      lastName: y.resp['lastName'],
-      image: this.imgUploadStr,
-      userId: y.resp['userId']
-    }
-*/
-    console.log("crated obk");
-    console.log(this.loggedUser.resp);
-    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+    let luser = JSON.parse(localStorage.getItem('currentUser'));
+    //console.log(luser);
+    luser.image = this.imgUploadStr;
+    console.log(luser);
+    //removed resp
+    this.userService.uploadImage(luser).subscribe(
       resp => {
         console.log(resp);
-        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        localStorage.setItem('currentUser', JSON.stringify(resp));
+        console.log("check lclsttrge after upload");
         console.log(localStorage);
         location.reload();
-        this.router.navigate(['/homepage']);
+        //this.router.navigate(['/homepage']);
       },
       error => {
         console.log('failed at registering');
@@ -477,5 +529,10 @@ i:number=0;
 
 
 
+<<<<<<< HEAD
 }
 >>>>>>> origin/v3
+=======
+
+}
+>>>>>>> v4
