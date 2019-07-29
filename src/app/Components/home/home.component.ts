@@ -31,12 +31,11 @@ export class HomeComponent implements OnInit {
   newcomment: Comment = new Comment();
   showComment: boolean = false;
   searchText: string = '';
-  imgUploadStr = '';
+  imgUploadStr:string = '';
   loggedUser: User = new User();
   theWeather: [];
   x:User = JSON.parse(localStorage.getItem('currentUser')).resp;
-
-  imageSrc = ''
+  imageSrc: string = '';
   //faLightbulb: IconDefinition;
 
 
@@ -192,25 +191,17 @@ export class HomeComponent implements OnInit {
   }
   uploadImage() {
     //need to grab
-    
-    console.log(this.imgUploadStr);
-    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.loggedUser.resp["image"] = this.imgUploadStr;
-/*    let objimage = {
-      username: y.resp['username'],
-      password: y.resp['password'],
-      firstName: y.resp['firstName'],
-      lastName: y.resp['lastName'],
-      image: this.imgUploadStr,
-      userId: y.resp['userId']
-    }
-*/
-    console.log("crated obk");
-    console.log(this.loggedUser.resp);
-    this.userService.uploadImage(this.loggedUser.resp).subscribe(
+    //console.log(this.imgUploadStr);
+    let luser = JSON.parse(localStorage.getItem('currentUser'));
+    //console.log(luser);
+    luser.image = this.imgUploadStr;
+    //console.log(luser);
+    //removed resp
+    this.userService.uploadImage(luser).subscribe(
       resp => {
         console.log(resp);
-        localStorage.setItem('currentUser', JSON.stringify({ resp }));
+        localStorage.setItem('currentUser', JSON.stringify(resp));
+        console.log("check lclsttrge after upload");
         console.log(localStorage);
         location.reload();
         this.router.navigate(['/homepage']);
@@ -220,6 +211,7 @@ export class HomeComponent implements OnInit {
       }
       )
   }
+
 
 
 
