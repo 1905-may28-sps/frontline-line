@@ -5,8 +5,6 @@ import { Router } from "@angular/router"
 import { PostService } from 'src/app/service/post.service';
 import { Post } from 'src/app/model/post';
 
-//import { Router } from '@angular/router';
-
 
 
 @Component({
@@ -27,7 +25,6 @@ export class HeaderComponent implements OnInit {
   constructor(private userService: UserService, private router: Router,private postService: PostService) { }
 
   ngOnInit() {
-    this.displayLogInOut();
     this.getPosts();
 
   }
@@ -37,29 +34,33 @@ export class HeaderComponent implements OnInit {
         console.log(this.loggedUser);
         if (resp != null) {
           this.loggedUser = resp;
-          localStorage.setItem('currentUser', JSON.stringify({ resp }));
-          console.log("logged in checker");
-          console.log(localStorage.length);
-          var x = JSON.parse(localStorage.getItem('currentUser'));
-          console.log(x.resp['image']);
-          this.router.navigate(['/homepage']);
-        }
-        else {
-          console.log("fail login")
-          console.log(this.loggedUser);
-        };
-      },
-      error => {
-        console.log('could not find user');
-        console.log(this.loggedUser);
-      }
-    )
-  }
-  //deletes the local storage, which logs out user
-  logout() {
-    localStorage.removeItem('currentUser');
-    console.log(localStorage.length);
-  }
+           //made changes here to deal with the resp issue(7/27)
+           localStorage.setItem('currentUser', JSON.stringify(this.loggedUser));
+           console.log(localStorage);
+           console.log("logged in checker");
+           console.log(localStorage.length);
+           var x = JSON.parse(localStorage.getItem('currentUser'));
+           //console.log(x.resp['image']);
+           this.router.navigate(['/homepage']);
+         }
+         else {
+           console.log("fail login")
+           console.log(this.loggedUser);
+           alert("Contact ");
+         };
+       },
+       error => {
+         console.log('could not find user');
+         console.log(this.loggedUser);
+         alert("Incorrect password");
+       }
+     )
+   }
+   //deletes the local storage, which logs out user
+   logout() {
+     localStorage.removeItem('currentUser');
+     console.log(localStorage.length);
+   }
 
   registerUser() {
     console.log("registering");
@@ -84,22 +85,10 @@ export class HeaderComponent implements OnInit {
       error => {
         console.log(this.regUser);
         console.log('failed at registering');
+        alert("Try Again");
       }
     )
-  }
-
-  displayLogInOut() {
-    if (localStorage.length == 0) {
-      //show login / signup
-
-      // hide logout
-
     }
-    else {
-      //hide login signup
-      //show logout
-    }
-  }
 
 
   getPosts() {

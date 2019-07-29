@@ -1,17 +1,14 @@
-    
-<nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-theme">
-        <!-- Navbar content -->
+<div class="image" style="background-color: burlywood" > 
 
+<nav class="navbar navbar-default navbar-expand-lg navbar-light navbar-theme" >
+        <!-- Navbar content -->
         
-      
         <!-- Login -->
         <ul class="nav navbar-nav navbar-right ml-auto">			
                 <li class="nav-item">
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
                     <ul class="dropdown-menu form-wrapper">					
                         <li>
-                            
-                                
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="username" id="username" [(ngModel)]="loggedUser.username" required="required">
                                 </div>
@@ -47,6 +44,46 @@
                       </li>
                     </ul>
                 </li>
-                <input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">
+               <!-- <input type="submit" class="btn btn-primary btn-block" value="Logout" (click)="logout()">-->
             </ul>
         </nav>
+        <title><h1>Welcome</h1></title>
+<img src="../../../assets/images/thefrontline.png" class="profile-img" style="display: block; margin-right: auto; margin-left: auto;" >
+<div class="welcome-text" style="display: inline-block; align-self: center; ">
+    <h1>Building Block of Corporate Connectivity</h1>
+</div>
+        <div class="container">
+            <div class="row">
+        <div class="row">
+            <!-- Left Nav-->
+            
+        </div>
+        
+<!-- Page Content -->
+
+
+
+
+ <!-- <div class="container posts"  >
+    <h2>Posts</h2>
+    <div class="postShow"  >
+      <ul class="list-group"  >
+         [disabled]="clicked"  
+        <li class="card list-group-item" *ngFor="let post of posts" (click)="toggleComment(post); clicked=true" >
+          <div>
+            <div class="card-header">
+              {{ post.user.firstName }}
+            </div>
+            <div class="card-body">
+              <p id="postShowBody" class="card-text">{{ post.body }}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+  <div class="footer"> <p>Footer</p></div>
+</div>
+            
+</div>
+</div>

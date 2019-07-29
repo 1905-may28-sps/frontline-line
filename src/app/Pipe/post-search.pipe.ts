@@ -11,10 +11,23 @@ export class PostSearchPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
 
     return items.filter(it => {
+      let test = it.body.toLowerCase().includes(searchText);
       console.log('TEST');
       console.log(it.body);
       console.log(searchText);
-      return it.body.toLowerCase().includes(searchText);
+      return test;
     });
   }
 }
+
+//  this.posts = this.posts.filter(it => {
+//       console.log('In filter post');
+      
+//       this.searchText = this.searchText.toLowerCase();
+//       let test =  it.body.toLowerCase().includes(this.searchText);
+      
+//       console.log(it.body + test);
+//       console.log(this.searchText);
+
+//       return test ;
+     

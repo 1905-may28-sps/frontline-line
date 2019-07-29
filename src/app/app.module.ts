@@ -10,7 +10,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { HomeComponent } from './Components/home/home.component';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
-//mport { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ThemeModule } from "./theme/theme.module";
 import { UserService } from './service/user.service';
 import { Post } from './model/post';
