@@ -8,7 +8,7 @@ import { Comment } from '../model/comment';
 export class CommentService {
 
   constructor(private http:HttpClient) { }
-  url='http://localhost:8080/Project2/comment';
+  url='http://localhost:8080/frontline/comment';
 
   reqOptions={
     headers: new HttpHeaders({'Content-Type' : 'application/json'}) 

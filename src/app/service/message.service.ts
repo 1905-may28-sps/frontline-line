@@ -8,7 +8,7 @@ import { Message } from '../model/message.model';
 export class MessageService {
 
   constructor(private http: HttpClient){}
-  url = 'http://localhost:8080/Project2/message';
+  url = 'http://localhost:8080/frontline/message';
   reqOptions = {
 
   headers: new HttpHeaders({'Content-Type' : 'application/json'}) 
