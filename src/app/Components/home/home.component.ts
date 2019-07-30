@@ -19,6 +19,10 @@ import { Router } from '@angular/router';
 import { Report } from 'src/app/model/report';
 import { ReportService } from 'src/app/service/report.service';
 import { ReportType } from 'src/app/model/report-type';
+import { Reaction } from 'src/app/model/reaction';
+import { ReactionService } from 'src/app/service/reaction.service';
+import { ReactionId } from 'src/app/model/reaction-id';
+import { ReactionType } from 'src/app/model/reaction-type';
 
 @Component({
   selector: 'app-home',
@@ -30,15 +34,17 @@ export class HomeComponent implements OnInit {
   posts: Post[]=[];
   filteredPosts: Post[] = [];
   post: Post=new Post();
-  comments: Comment[] = [];
   newpost: Post = new Post();
   newcomment: Comment = new Comment();
+  comments: Comment[] = [];
   showComment: boolean = false;
   showComment1: boolean = false;
+  
+  reactions: Reaction[] = [];
+  newreaction: Reaction = new Reaction();
   newReport:Report = new Report();
 
   searchText: string = '';
-  
   imgUploadStr:string = '';
   loggedUser: User = new User();
   theWeather: [];
@@ -49,7 +55,7 @@ export class HomeComponent implements OnInit {
   //faLightbulb: IconDefinition;
 
 
-  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService,  private reportService: ReportService, private router: Router) { 
+  constructor(private themeService: ThemeService, private userService: UserService, private postService: PostService, private messageService: MessageService, private commentService: CommentService,  private reportService: ReportService, private reactionService: ReactionService, private router: Router) { 
     console.log('in user service constructor')
   }
 
@@ -59,6 +65,8 @@ export class HomeComponent implements OnInit {
     this.getPosts();
     this.getComments();
     this.getweather();
+    //this.getReactions();
+    
   }
 
   toggleComment(post: Post) {
@@ -120,7 +128,7 @@ export class HomeComponent implements OnInit {
               }
               
     )} else {
-      alert("Try again")
+      alert("Try again");
   
     }
   }
@@ -262,7 +270,98 @@ export class HomeComponent implements OnInit {
       )
   }
 
+// getReactions (){
+//   console.log(" Attempting to add a reaction!")
+//   this.reactionService.getReactions().subscribe(
 
+//   )
+// }
+addReaction( post: Post){
+  console.log(" Attempting to add a reaction!");
 
+   let react = new Reaction();
+    let type = new ReactionType();
+   let reactId = new ReactionId();
+   console.log("franklin read this!!!!!!!!!!!!");
+  console.log(post);
+  reactId.postId=post.postId;
+  reactId.userId = this.x.userId;
+  type.reactionTypeId=1;
+  type.reactionType='Like';
+  react.reactionType=type;
+  // react.reactionType.reactionTypeId = 1;
+  // react.reactionType.reactionType = "Like"; 
+  react.reactionId = reactId;
+  console.log("franklin read this");
+  console.log(react);
+  console.log("franklin read this");
+  this.reactionService.addReaction(react).subscribe(
+    
+    resp => {
+      console.log(resp);
+    }
+
+  )
+
+  //thiss.n
+}
+addReaction1( post: Post){
+  console.log(" Attempting to add a reaction!");
+
+   let react = new Reaction();
+    let type = new ReactionType();
+   let reactId = new ReactionId();
+   console.log("franklin read this!!!!!!!!!!!!");
+  console.log(post);
+  reactId.postId=post.postId;
+  reactId.userId = this.x.userId;
+  type.reactionTypeId=2;
+  type.reactionType='Dislike';
+  react.reactionType=type;
+  // react.reactionType.reactionTypeId = 1;
+  // react.reactionType.reactionType = "Like"; 
+  react.reactionId = reactId;
+  console.log("franklin read this");
+  console.log(react);
+  console.log("franklin read this");
+  this.reactionService.addReaction(react).subscribe(
+    
+    resp => {
+      console.log(resp);
+    }
+
+  )
+
+  //thiss.n
+}
+addReaction2( post: Post){
+  console.log(" Attempting to add a reaction!");
+
+   let react = new Reaction();
+    let type = new ReactionType();
+   let reactId = new ReactionId();
+   console.log("franklin read this!!!!!!!!!!!!");
+  console.log(post);
+  reactId.postId=post.postId;
+  reactId.userId = this.x.userId;
+  type.reactionTypeId=3;
+  type.reactionType='Love';
+  react.reactionType=type;
+  // react.reactionType.reactionTypeId = 1;
+  // react.reactionType.reactionType = "Like"; 
+  react.reactionId = reactId;
+  console.log("franklin read this");
+  console.log(react);
+  console.log("franklin read this");
+  this.reactionService.addReaction(react).subscribe(
+    
+    resp => {
+      console.log(resp);
+    }
+
+  )
+
+  //thiss.n
+}
 
 }

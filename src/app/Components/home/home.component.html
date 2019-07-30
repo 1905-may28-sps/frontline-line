@@ -71,7 +71,7 @@
 
 		<!-- Page Content -->
 		<div class="col-6" >
-		<div class="Content"><h1 >Welcome  </h1></div>
+		<div class="Content"><h1 >Welcome {{ x.firstName }}  </h1></div>
 
 
 			<div class="container posts">
@@ -111,15 +111,15 @@
 										<div class="input-group-append">
 											<button class="btn btn-outline-secondary" type="button" id="addComButton" (click) = "addComment(post)" class="btn btn-outline-success my-2 my-sm-0">Say it!</button>
 											
-											<button class="btn btn-outline-success my-2 my-sm-0">
+											<button class="btn btn-outline-success my-2 my-sm-0" (click) = "addReaction(post)">
 												<img src="../../../assets/images/motivation.png" width="25"
 													height="30" value=1>
 											</button>
-											<button class="btn btn-outline-success my-2 my-sm-0">
+											<button class="btn btn-outline-success my-2 my-sm-0" (click) = "addReaction1(post)">
 												<img src="../../../assets/images/hands-and-gestures.png" width="25"
 													height="30" value=2>
 											</button>
-											<button class="btn btn-outline-success my-2 my-sm-0">
+											<button class="btn btn-outline-success my-2 my-sm-0" (click) = "addReaction2(post)">
 												<img src="../../../assets/images/fan.png" width="25"
 													height="30" value=3>
 											</button>
@@ -138,7 +138,8 @@
 										<div *ngIf="post.postId==postcomment.postId.postId" >
 											<div class="commentSection">
 											<ul class="list-group-item" class= " border border-info" style = "background-color: white; margin: 5px" ><b>@{{postcomment.userId.firstName}}</b>
-												{{postcomment.body}}</ul>
+												{{postcomment.body}}
+											</ul>
 											</div>
 										</div>
 									</div>
@@ -156,7 +157,7 @@
 								<h1 class="Condition"><i class="material-icons sun">{{theWeather.weather[0].main}}</i>  {{theWeather.weather[0].description}}</h1>
 								<br>
 								
-								<h1 class="Temp"> {{theWeather.main.temp}}<span id="F">&#8457;</span></h1>
+								<h1 class="Temp"> {{theWeather.main.temp}}<span id="F">&#8451;</span></h1>
 								<h1 class="Time">Current Weather</h1>
 								<h1 class="Location"><i class="material-icons locationIcon">place</i> {{theWeather.name}} </h1>
 							  </div>
